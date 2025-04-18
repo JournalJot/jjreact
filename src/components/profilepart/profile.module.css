@@ -1,0 +1,159 @@
+
+
+
+
+.logo{
+    padding: 15px;
+}
+
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0 auto; */
+}
+
+.profile .container{
+    display: flex;
+    padding: 50px;
+    /* border: 1px solid black; */
+    height: auto;
+    width: 50%;
+    gap: 100px;
+    background-color: rgba(0, 0, 0, 0.527);
+    color: white;
+    border-radius: 50px;
+}
+
+.profile .container .profileuserimage{
+    display: block;
+}
+
+.profile .container .profileuserimage button{
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile .container .userdetails label{
+    text-transform: uppercase;
+}
+
+.profile .container .userdetails .change{
+    margin-left: 85%;
+    color: #0069ff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.profile .container .userdetails input{
+    /* margin-bottom: 20px; */
+    margin-left: 10px;
+    border-radius: 10px;
+    height: 25px;
+    border: none;
+    width: 100%;
+    outline: none;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.profile .container .userdetails form div{
+    margin-bottom: 20px;
+}
+
+.profile .container .userdetails .account-deletion #delete{
+    color: #0069ff;
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.profile .container .userdetails .account-deletion p{
+    font-size: 14px;
+}
+
+#Xe{
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 15px;
+    /* height: 30px; */
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    width: 30%;
+
+}
+
+#sve{
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    width: 30%;
+}
+
+@media (max-width: 767px){
+
+    .profile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* padding: 40px; */
+        height: auto;
+    }
+
+    .profile .container{
+        display: block;
+        width: 85%;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .profile .container .profileuserimage img{
+        display: block;
+        margin: 0 auto;
+        width: 100px;
+    }
+
+    .profile .container .profileuserimage button{
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+        padding: 10px;
+        text-transform: uppercase;
+    }
+
+    .profile .container .userdetails input{
+        margin: 0;
+    }
+
+    .profile .container .userdetails form div{
+        margin-top: 10px;
+    }
+
+    .profile .container .userdetails .account-deletion #delete{
+        text-align: center;
+    }
+
+    .profile .container .userdetails .account-deletion p{
+        text-align: center;
+    }
+
+    #sve {
+        width: 100%;
+    }
+
+    #X{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,256 @@
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+head{
+    height: 0;
+}
+section {
+    margin: 0;
+}
+
+.logbod{
+    font-family: 'Raleway', 'Open Sans', sans-serif;
+    background-image: url(../Images/beautiful-wooden-pathway-going-breathtaking-colorful-trees-forest_181624-5840.jpg.avif);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; */
+    /* overscroll-behavior: none; */
+    margin: 0;
+    scroll-behavior: smooth;
+    background-color: rgba(0, 0, 0, 0.89);
+    height: 100%;
+    width: 100%;
+}
+/* .bigcontainer div{
+    height: 100%;
+    width: 100%;
+} */
+
+.container {
+    /* position: relative; */
+    width: 500px;
+    height: 415px;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* padding: 5px; */
+}
+
+#home{
+    border: 2px solid white;
+    padding: 5px 20px;
+    margin-top: 65px;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.formbox {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    /* background: rgba(255, 255, 255, 0.9); */
+}
+
+.formcontent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+    display: flex;
+}
+
+.hidden {
+    transform: translateX(100%);
+}
+
+.caption {
+    background-color: #0069FF;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.caption img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.caption p {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-family: comic Sans MS, 'Raleway', 'Open Sans', sans-serif;
+}
+
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.815), rgba(255, 255, 255, 0.1));
+    /* opacity: 50%; */
+}
+
+form img{
+    display: block;
+    max-width: 100%;
+}
+
+form input {
+    width: 80%;
+    height: 35px;
+    margin: 2px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #0069FF;
+    background-color: #ffffffcb;
+    outline: none;
+}
+
+form input:focus {
+    border: 1px solid #0044cc;
+    box-shadow: 0 0 5px rgba(0, 102, 255, 0.6);
+    transition: 0.55s ease-in-out;
+}
+
+form button {
+    background-color: #0069FF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.65s;
+    text-transform: uppercase;
+    margin-top: 10px;
+    /* max-width: 100px;
+    width: 100%; */
+}
+
+form button:hover {
+    background-color: #012558ec;
+}
+
+form #acct{
+    padding-top: 10px;
+}
+
+#signupForm p{
+    padding: 40px;
+    letter-spacing: 4px;
+}
+
+#signupForm #log{
+    font-size: 10px;
+    padding: 20px 0px;
+}
+
+#signupForm a{
+    border: 2px solid white;
+    padding: 5px 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+#signupForm a:hover{
+    color: #012558ec;
+    transition: 0.5s;
+}
+
+form #sgnbtn{
+    margin: 0;
+}
+
+form p {
+    text-align: center;
+}
+
+form a {
+    color: #0069FF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Media Queries for Responsiveness */
+
+/* Mobile Phones (up to 767px) */
+@media (max-width: 767px) {
+    .container {
+        margin-top: 180px;
+        padding: 10px; 
+        text-align: center;
+        height: 435px;
+    }
+
+    .caption{
+        width: 50%;
+    }
+
+    .caption p {
+        font-size: 18px; /* Smaller font size for mobile */
+    }
+
+    form input {
+        width: 90%; /* Slightly smaller width for mobile */
+        font-size: 16px;
+    }
+
+    form button {
+        width: 90%; /* Slightly smaller width for mobile */
+        font-size: 16px;
+    }
+
+    form p{
+        font-size: 14px;
+    }
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        margin-top: 120px;
+        max-width: 900px; /* Slightly larger container for tablets */
+    }
+
+    .caption p {
+        font-size: 22px; /* Slightly larger font size for tablets */
+    }
+}
+
+/* Large Devices (1024px and above) */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 800px; /* Larger container for desktops */
+    }
+
+    .caption p {
+        font-size: 24px; /* Larger font size for desktops */
+    }
+}
