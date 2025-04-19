@@ -6,8 +6,10 @@ import MainLayout from './Layouts/MainLayout';
 import Home from './Pages/Home';
 import LoginPage from './Pages/loginPage';
 import Signuppage from './Pages/Signuppage';
-import Profile from './components/profilepart/profile';
+import Editdiarypage from './Pages/Editdiarypage';
+import ProfilePage from './Pages/ProfilePage';
 
+//routers
 const router = createBrowserRouter(
   createRoutesFromElements(
   <Route path='/' element = {<MainLayout />}>
@@ -15,7 +17,8 @@ const router = createBrowserRouter(
     <Route path='/Home' element={<Home /> }/>
     <Route path='/LoginPage' element={<LoginPage /> }/>
     <Route path='/Signuppage' element={<Signuppage /> }/>
-    <Route path='/ProfilePage' element={<Profile /> }/>
+    <Route path='/ProfilePage' element={<ProfilePage /> }/>
+    <Route path='/Editdiarypage' element={<Editdiarypage /> }/>
   </Route>)
 );
 

@@ -1,0 +1,129 @@
+
+.container{
+    height: 100%;
+    width: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    background-image: url('../Images/photo-1691322682852-6f3b5421d2fa.avif');
+}
+.navcont{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
+.logo{
+   
+}
+
+
+.navbar{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    height: 50px;
+    margin: 50;
+    padding: 0;
+}
+.navlist{
+    height: 80px;
+    padding-right: 0px;
+    list-style: none;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.navlink{
+    color: white;
+    
+    padding: 14px;
+    
+    text-decoration: none;
+}
+.navlink:active{
+    background-color: #001DFF;
+}
+.navlink:hover{
+    background-color: #001DFF;
+}
+.body,html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.bodycont{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.innerbody{
+    
+    min-height: 500px;
+    
+    width: 60%;
+    
+}
+.head{
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.diarycont{
+    display: flex;
+    min-width: 300px;
+    min-height: 400px;
+    justify-content: space-between;
+    
+
+}
+.txtarea{
+    background-color: white;
+    margin-left: 30px;
+    height: 350px;
+    border-radius: 40px;
+    margin-top: 20px;
+    min-width: 300px;
+}
+.mapscont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 40px;
+    margin-right: 90px;
+    height: 330px;
+    margin-top: 60px;
+    min-height: 100px;
+    min-width: 300px;
+}
+.map{
+    text-align: center;
+    justify-self: center;
+    align-items: center;
+    align-self: center;
+}
+.mapinfo{
+    display: flex;
+    justify-content: space-around;
+}
+.maphead{
+    text-align: left;
+    width: 150px;
+    height: 40px;
+}
+.mapbut{
+    align-self: center;
+    border: 0;
+    border-radius: 40px;
+    height: 30px;
+    width: 90px;
+}
+.mapbut:hover{
+    background: #001DFF;
+    color: white;
+}
