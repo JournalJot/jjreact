@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './profile.module.css';
+import axios from 'axios';
 
 const Profile = () => {
+
+    const [userData, setUserData] = useState({});
+    const fetchApi = async () => {
+        const response = await axios.get("http://127.0.0.1:5000/api/data");
+        setUserData(response.data);
+        console.log(response.data.name);
+    }
+    useEffect(() => {
+        fetchApi();
+    }, []);
+
+    
+
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -46,7 +61,7 @@ const Profile = () => {
                                         className={classes.input}
                                         name="username"
                                         type="text"
-                                        placeholder="user-placeholder"
+                                        placeholder={userData.name}
                                         value={formData.username}
                                         onChange={handleChange}
                                     />
