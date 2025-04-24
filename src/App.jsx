@@ -8,6 +8,7 @@ import LoginPage from './Pages/loginPage';
 import Signuppage from './Pages/Signuppage';
 import Editdiarypage from './Pages/Editdiarypage';
 import ProfilePage from './Pages/ProfilePage';
+import Homecode from './components/Homepart/Homecode';
 
 //routers
 const router = createBrowserRouter(
@@ -19,6 +20,8 @@ const router = createBrowserRouter(
     <Route path='/Signuppage' element={<Signuppage /> }/>
     <Route path='/ProfilePage' element={<ProfilePage /> }/>
     <Route path='/Editdiarypage' element={<Editdiarypage /> }/>
+    <Route path='/Home' element={<Home /> }/>
+
   </Route>)
 );
 
