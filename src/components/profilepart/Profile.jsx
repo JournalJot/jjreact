@@ -5,6 +5,9 @@ import axios from 'axios';
 const Profile = () => {
 
     const [userData, setUserData] = useState({});
+    const [message, setMessage] = useState('');
+
+
     const fetchApi = async () => {
         const response = await axios.get("http://127.0.0.1:5000/api/data");
         setUserData(response.data);
@@ -31,8 +34,18 @@ const Profile = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        //send to backend here
+        try{
+            const response = await axios.post('http://localhost:5000/api/user', {
+              name: formData.username,
+              email: formData.email,
+              password: formData.password
+            });setMessage(response.data.message);
+        } catch (error) {
+          setMessage(error.response?.data?.message || "Login failed");
+        }
         // Form submission logic here
         console.log("Form submitted:", formData);
     };
@@ -74,7 +87,7 @@ const Profile = () => {
                                         className={classes.input}
                                         name="email"
                                         type="email"
-                                        placeholder="user-email"
+                                        placeholder={userData.email}
                                         value={formData.email}
                                         onChange={handleChange}
                                     />
