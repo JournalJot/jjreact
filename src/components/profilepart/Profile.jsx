@@ -6,7 +6,8 @@ const Profile = () => {
 
     const [userData, setUserData] = useState({});
     const [message, setMessage] = useState('');
-
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState('');
 
     const fetchApi = async () => {
         const response = await axios.get("http://127.0.0.1:5000/api/data");
@@ -15,6 +16,19 @@ const Profile = () => {
     }
     useEffect(() => {
         fetchApi();
+        //for image
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get("http://localhost:5000/api/data");
+                setUserData(response.data);
+                if (response.data.profile_pic) {
+                    setPreviewUrl(`http://localhost:5000/profile_pic/${response.data.id}`);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+        fetchUserData();
     }, []);
 
     
@@ -50,8 +64,49 @@ const Profile = () => {
         console.log("Form submitted:", formData);
     };
 
+    const handleUpload = async () => {
+        if (!selectedFile) {
+            setMessage("Please select a file first");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try {
+            const response = await axios.post(
+                `http://localhost:5000/upload_profile_pic/${userData.id}`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            setMessage(response.data.message);
+        } catch (error) {
+            setMessage(error.response?.data?.error || "Upload failed");
+        } };
+
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setSelectedFile(file);
+
+        // Create preview URL
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewUrl(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
+    
+
     return (
         <>
+        <section className={classes.wcontainer}>
             
                 <div className={classes.logo}>
                     <a href="#"><img src="../IMG/logo final svg.svg" alt="logo" width="70px" />
@@ -61,8 +116,21 @@ const Profile = () => {
                 <section className={classes.profile}>
                     <div className={classes.container}>
                         <div className={classes.profileuserimage}>
-                            <img src="../IMG/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="acc" width="200px" /> <br />
-                            <button className={classes.uploadButton}>upload image</button>
+                        {previewUrl ? (
+                        <img src={previewUrl} alt="acc" width="200px" />
+                    ) : (
+                        <div className={classes.placeholder}>No image selected</div>
+                    )} <br/>
+                            
+                            <input
+                            className='width:20px; height:20px'
+                        type="file"
+                        id="profileUpload"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        
+                />
+                           <br/> <button className={classes.uploadButton} onClick={handleUpload}>upload image</button>
                         </div>
 
                         <div className={classes.userdetails}>
@@ -120,7 +188,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </section>
-            
+            </section>
         </>
     );
 };

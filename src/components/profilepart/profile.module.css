@@ -1,6 +1,18 @@
 
 
-
+.wcontainer{
+    font-family: 'Raleway', 'Open Sans', sans-serif;
+    background-image: url(../Images/sandcastle.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    scroll-behavior: smooth;
+    background-color: rgba(0, 0, 0, 0.89);
+    height: 100%;
+    width: 100%;
+}
 
 .logo{
     padding: 15px;
@@ -27,6 +39,11 @@
 
 .profile .container .profileuserimage{
     display: block;
+}
+
+.uploadButton:hover{
+    background-color: blue;
+    color: white;
 }
 
 .profile .container .profileuserimage button{
