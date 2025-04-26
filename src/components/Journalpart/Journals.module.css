@@ -1,0 +1,175 @@
+.cont{
+    min-height: 100vh;
+    background-image: url('../Images/sneha-sivarajan-K8Lh4OenP_E-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Raleway', 'Open Sans', Arial, sans-serif;
+}
+
+.navhead{
+    height: 180px;  
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 65px;
+    /* background-color: rgba(250, 248, 248, 0.596); */
+    background: rgba(255, 255, 255, 0.918);
+    /* backdrop-filter: blur(8px); */
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar .links #profile{
+    font-size: 20px;
+    width: 40px;
+    margin-left: 15px;
+}
+
+.navbar .links{
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+    margin: 0;
+}
+
+
+/* .navhead .links ul{
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    gap: 40px;
+    height: 100%;
+} */
+.listcont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    
+    height: 100%;
+}
+.list{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* .navhead .links ul li a{
+    color: black; 
+    text-decoration: none;
+    height: 100%;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+} */
+.navlink{
+    color: black; 
+    padding: 0 15px; /* Horizontal padding for spacing */
+    display: inline-block;
+    height: 100%; /* Matches the height of the parent li */
+    line-height: 60px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.navlink:hover{
+    background-color: #6A2B00;
+    height: 100%;
+    color: white;
+}
+
+.main {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .filter {
+    margin-bottom: 20px;
+  }
+  
+  .filterButton {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .filterButton:hover {
+    background-color: #555;
+  }
+  
+  /* Cards */
+  .cardsContainer {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cardTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .cardDescription {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 15px;
+    color: white;
+  }
+  
+  .cardImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .cardLocation {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  .cardActions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .actionButton {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .actionButton:hover {
+    background-color: #555;
+  }
