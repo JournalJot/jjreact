@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './Journals.module.css'
 import Logo from '../Images/New Logo svg.svg'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useState } from 'react'
+import Journalcard from './Journalcard'
 
 const Journals = () => {
+
+  const [formData, setFormData] = useState({
+          email: "",
+          Journal_Body: "",
+          Journal_Title: "",
+          Travel_Pic: "",
+          Country: "",
+          City: "",
+          District: "",
+          Latitude:"",
+      });
+
+      const fetchApi = async () => {
+        const response = await axios.get("http://127.0.0.1:5000/api/journals");
+        setFormData(response.data);
+        console.log(response.data.name);
+    }
+    useEffect(() => {
+      fetchApi();
+    },[])
   return (
     <>
     <section className={classes.cont}>
@@ -35,32 +58,7 @@ const Journals = () => {
 
         <div className={classes.cardsContainer}>
           {/* Card 1 */}
-          <div className={classes.card}>
-            <h2 className={classes.cardTitle}>Title</h2>
-            <p className={classes.cardDescription}>
-              I found my stay at blah blah, truly enticing and so and so, extension of words. This is a summary. (It could also be [No summary])
-            </p>
-            <img src="image1.jpg" alt="Preview" className={classes.cardImage} />
-            <div className={classes.cardLocation}>North Virginia, americana, earth.</div>
-            <div className={classes.cardActions}>
-              <button className={classes.actionButton}>Read</button>
-              <button className={classes.actionButton}>View</button>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className={classes.card}>
-            <h2 className={classes.cardTitle}>Title</h2>
-            <p className={classes.cardDescription}>
-              I found my stay at blah blah, truly enticing and so and so, extension of words. This is a summary. (It could also be [No summary])
-            </p>
-            <img src="image2.jpg" alt="Preview" className={classes.cardImage} />
-            <div className={classes.cardLocation}>North Virginia, americana, earth.</div>
-            <div className={classes.cardActions}>
-              <button className={classes.actionButton}>Read</button>
-              <button className={classes.actionButton}>View</button>
-            </div>
-          </div>
+          <Journalcard />
         </div>
     </main>
     </section>
