@@ -33,7 +33,7 @@ const Editdiary = () => {
         longitude: ""
     })
     const fetchLocation = async () => {
-        const response = await axios.get("https://arby.pythonanywhere.com//api/location")
+        const response = await axios.get("https://arby.pythonanywhere.com/api/location")
         try{
             setUserLocation(response.data);
             console.log(response.data.longitude)
@@ -43,7 +43,7 @@ const Editdiary = () => {
         }
     }
     const fetchApi = async () => {
-        const response = await axios.get("https://arby.pythonanywhere.com//api/journal");
+        const response = await axios.get("https://arby.pythonanywhere.com/api/journal");
         try{
         setJournals(response.data);
         console.log(response.data.longitude);
@@ -100,7 +100,7 @@ const handleClick = async (e) => {
     e.preventDefault();
     //send to backend here
     try{
-        const response = await axios.post('http://localhost:5000/api/journal', {
+        const response = await axios.post('https://arby.pythonanywhere.com/api/journal', {
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
@@ -116,7 +116,8 @@ const handleClick = async (e) => {
     }
     // Form submission logic here
     
-    
+    console.log(userLocation.latitude)
+    console.log(journals.latitude)
     console.log("Form submitted:", journals);
 };
 

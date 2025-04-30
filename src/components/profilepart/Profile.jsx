@@ -21,7 +21,7 @@ const Profile = () => {
         //for image
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/data");
+                const response = await axios.get("https://arby.pythonanywhere.com/api/data");
                 setUserData(response.data);
                 if (response.data.profile_pic) {
                     setPreviewUrl(`http://localhost:5000/profile_pic/${response.data.id}`);
@@ -54,7 +54,7 @@ const Profile = () => {
         e.preventDefault();
         //send to backend here
         try{
-            const response = await axios.post('http://localhost:5000/api/user', {
+            const response = await axios.post('https://arby.pythonanywhere.com/api/user', {
               name: formData.username,
               email: formData.email,
               password: formData.password
