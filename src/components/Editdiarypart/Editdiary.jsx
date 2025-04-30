@@ -33,7 +33,7 @@ const Editdiary = () => {
         longitude: ""
     })
     const fetchLocation = async () => {
-        const response = await axios.get("http://127.0.0.1:5000/api/location")
+        const response = await axios.get("https://arby.pythonanywhere.com//api/location")
         try{
             setUserLocation(response.data);
             console.log(response.data.longitude)
@@ -43,7 +43,7 @@ const Editdiary = () => {
         }
     }
     const fetchApi = async () => {
-        const response = await axios.get("http://127.0.0.1:5000/api/journal");
+        const response = await axios.get("https://arby.pythonanywhere.com//api/journal");
         try{
         setJournals(response.data);
         console.log(response.data.longitude);
