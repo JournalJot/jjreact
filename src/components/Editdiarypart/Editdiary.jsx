@@ -16,7 +16,11 @@ const Editdiary = () => {
     const [message, setMessage] = useState("Error");
     const [userLocation, setUserLocation] = useState ("")
 
+    console.log(message);
 
+    if(!markers){
+        setMarkers({lat: "", lng: ""})
+    }
     const[journals, setJournals] = useState({
         email: "john@gmail.com",
         journal_title: "",
@@ -157,7 +161,7 @@ const handleClick = async (e) => {
                         <MapContainer center={markers} zoom={13} ref={mapRef}>
                             <TileLayer attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"  />
-                            <Marker position={[journals.latitude, journals.longitude]}></Marker>
+                            <Marker position={[journals.latitude, journals.longitude]} icon={customIcon}></Marker>
                             {/* {location.loaded && !location.error && (
                                 <Marker position={[location.coordinates.lat, location.coordinates.lng]} icon={customIcon}></Marker>
                             )}   this was for geolocation*/}

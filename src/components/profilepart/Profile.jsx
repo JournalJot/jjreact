@@ -9,10 +9,12 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState('');
 
+    console.log(message);
     const fetchApi = async () => {
         const response = await axios.get("http://127.0.0.1:5000/api/data");
         setUserData(response.data);
         console.log(response.data.name);
+        
     }
     useEffect(() => {
         fetchApi();
