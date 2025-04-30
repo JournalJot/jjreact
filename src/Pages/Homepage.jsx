@@ -9,8 +9,8 @@ import ProfilePage from './ProfilePage'
 const Homepage = () => {
   return (
     <>
-    nothing
-    <ProfilePage />
+    <Home />
+    
     </>
   )
 }
