@@ -1,5 +1,5 @@
 import React from 'react'
-import Profile from '../components/profilepart/Profile.jsx'
+import Profile from '../components/profilepart/Profile'
 
 
 const ProfilePage = () => {
