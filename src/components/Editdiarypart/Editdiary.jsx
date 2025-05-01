@@ -59,7 +59,7 @@ const Editdiary = () => {
         city: "",
         country: "",
         district: "",
-        travel_pic: "",
+        travel_pic: "../Images/logo bigger.png",
         latitude: "",
         longitude: ""})
         }
@@ -117,7 +117,7 @@ const handleClick = async (e) => {
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', 
             
-          updatedJournals,
+            JSON.parse(updatedJournals),
          
 
     {
@@ -133,7 +133,7 @@ const handleClick = async (e) => {
     
     
     console.log(journals.latitude)
-    console.log("Form submitted:", journals);
+    console.log("Form submitted:", JSON.parse(updatedJournals));
 };
 
 
