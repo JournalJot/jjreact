@@ -128,7 +128,7 @@ const handleClick = async (e) => {
     }
     // Form submission logic here
     
-    console.log(userLocation.location.latitude)
+    
     console.log(journals.latitude)
     console.log("Form submitted:", journals);
 };
