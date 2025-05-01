@@ -2,8 +2,8 @@
     "rewrites": [
       { "source": "/(.*)", "destination": "/" },
             {
-      "source": "/api/:path*",  // Match all routes starting with /api/
-      "destination": "https://your-backend-project.vercel.app/api/:path*" // Forward to backend
+      "source": "/api/:path*",  
+      "destination": "https://your-backend-project.vercel.app/api/:path*" 
     },
     ]
   }
