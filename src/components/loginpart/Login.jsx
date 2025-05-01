@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import classes from './Logsign.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Container, Typography,Box, Button, Input } from '@mui/material';
+import loginbg from "../Images/beautiful-wooden-pathway-going-breathtaking-colorful-trees-forest_181624-5840.jpg.avif"
+import anim from "../Images/workspace-unscreen.gif"
+import usericon from "../Images/user-octagon-svgrepo-com.png"
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -16,62 +19,231 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
+    navigate("./Home");
     // Handle login logic here
+
+    
     console.log('Login form submitted:', formData);
   };
 
   return (
-    <section className={classes.logbod}>
-      <div className={classes.container}>
-        <div className={classes.formbox} id={classes.formBox}>
-          {/* Login Form */}
-          <div id={classes.loginForm} className={classes.formcontent}>
-            <div className={classes.caption}>
-              <img 
-                src="../Images/workspace.gif" 
-                alt="animation" 
-                loading="lazy" 
-                height="100px" 
+    <Box
+      component="section"
+      sx={{
+        fontFamily: "'Raleway', 'Open Sans', sans-serif",
+        backgroundImage:
+          `url(${loginbg})`,
+        backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 0,
+        width: '100%',
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: '1200px',
+          width: '100%',
+          margin: '0 auto',
+          padding: '20px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            maxWidth: '500px',
+            height: 'auto',
+            borderRadius: '10px',
+            overflow: 'hidden',
+            position: 'relative',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              height: '100%',
+              transition: 'transform 0.6s ease-in-out',
+            }}
+          >
+            <Box
+              sx={{
+                component: 'leftpart',
+                backgroundColor: '#6A2B00',
+                width: '220px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white',
+                padding: '20px',
+              }}
+            >
+              <img
+                src={anim}
+                alt="animation"
+                loading="lazy"
+                style={{ width: '100px', marginBottom: '10px' }}
               />
-              <p id={classes.slo}>WHERE TO NEXT?</p>
-              <a href="../index.html" id={classes.home}>Home</a>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <img 
-                src="../Images/user-octagon-svgrepo-com.png" 
-                alt="User" 
-                height="150px" 
-                loading="lazy" 
+              <Typography
+                component="p"
+                sx={{
+                  fontSize: '24px',
+                  textTransform: 'uppercase',
+                  fontFamily: "comic Sans MS, 'Raleway', 'Open Sans', sans-serif",
+                  textAlign: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                WHERE TO NEXT?
+              </Typography>
+              <Button
+                component="a"
+                href="/Home"
+                sx={{
+                  border: '2px solid white',
+                  padding: '5px 20px',
+                  marginTop: '15px',
+                  textDecoration: 'none',
+                  color: 'white',
+                  borderRadius: '10px',
+                  textTransform: 'uppercase',
+                  '&:hover': {
+                    color: '#012558ec',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                }}
+              >
+                Home
+              </Button>
+            </Box>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '20px',
+                background:
+                  'linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(223, 223, 223, 0.5))',
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              <img
+                src={usericon}
+                alt="User"
+                height="150px"
+                loading="lazy"
+                style={{ display: 'block', maxWidth: '100%', marginBottom: '20px' }}
               />
-              <input
+              <Input
                 type="email"
-                id="minput"
                 name="email"
                 placeholder="E-mail"
                 value={formData.email}
                 onChange={handleChange}
+                disableUnderline
+                sx={{
+                  width: '100%',
+                  height: '35px',
+                  padding: '2px',
+                  marginBottom: '10px',
+                  borderRadius: '10px',
+                  border: '1px solid #6A2B00',
+                  backgroundColor: '#ffffffcb',
+                  outline: 'none',
+                  '&:focus': {
+                    border: '1px solid #6A2B00',
+                    boxShadow: '0 0 5px rgba(105, 43, 11, 1)',
+                    transition: '0.55s ease-in-out',
+                    outline: 'none',
+                  },
+                }}
               />
-              <br />
-              <input
+              <Input
                 type="password"
-                id="pwrd"
                 name="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
+                disableUnderline
+                sx={{
+                  width: '100%',
+                  height: '35px',
+                  padding: '2px',
+                  marginBottom: '20px',
+                  borderRadius: '10px',
+                  border: '1px solid #6A2B00',
+                  backgroundColor: '#ffffffcb',
+                  outline: 'none',
+                  '&:focus': {
+                    border: '1px solid #6A2B00',
+                    boxShadow: '0 0 5px rgba(105, 43, 11, 0.6)',
+                    transition: '0.55s ease-in-out',
+                  },
+                  '&:focus-visible': {
+                  outline: 'none',
+                  },
+
+                }}
               />
-              <button type="submit">log in</button>
-              <p id={classes.acct}>
+              <Button
+                type="submit"
+                sx={{
+                  backgroundColor: '#6A2B00',
+                  color: 'white',
+                  padding: '10px 15px',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  textTransform: 'uppercase',
+                  '&:hover': {
+                    backgroundColor: '#471C01',
+                  },
+                }}
+              >
+                log in
+              </Button>
+              <Typography
+                component="p"
+                sx={{
+                  paddingTop: '10px',
+                  textAlign: 'center',
+                  fontSize: '1rem',
+                  marginTop: '20px',
+                }}
+              >
                 Don't have an account? <br />
-                <Link to="/Signuppage" id={classes.showSignup}>Sign up</Link>
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+                <Link
+                  to="/Signuppage"
+                  style={{
+                    color: '#6A2B00',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Sign up
+                </Link>
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

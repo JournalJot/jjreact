@@ -11,7 +11,7 @@ const Profile = () => {
 
     console.log(message);
     const fetchApi = async () => {
-        const response = await axios.get("https://arby.pythonanywhere.com//api/data");
+        const response = await axios.get("https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/data");
         setUserData(response.data);
         console.log(response.data.name);
         
@@ -21,10 +21,10 @@ const Profile = () => {
         //for image
         const fetchUserData = async () => {
             try {
-                const response = await axios.get("https://arby.pythonanywhere.com/api/data");
+                const response = await axios.get("https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/data");
                 setUserData(response.data);
                 if (response.data.profile_pic) {
-                    setPreviewUrl(`http://localhost:5000/profile_pic/${response.data.id}`);
+                    setPreviewUrl(`https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/profile_pic/${response.data.id}`);
                 }
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -54,7 +54,7 @@ const Profile = () => {
         e.preventDefault();
         //send to backend here
         try{
-            const response = await axios.post('https://arby.pythonanywhere.com/api/user', {
+            const response = await axios.post('https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/user', {
               name: formData.username,
               email: formData.email,
               password: formData.password
@@ -77,7 +77,7 @@ const Profile = () => {
 
         try {
             const response = await axios.post(
-                `http://localhost:5000/upload_profile_pic/${userData.id}`,
+                `https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/upload_profile_pic/${userData.id}`,
                 formData,
                 {
                     headers: {

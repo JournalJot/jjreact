@@ -1,6 +1,6 @@
 import React from 'react'
-import classes from './Home.module.css'
-import Logo from '../Images/logo final svg.svg'
+import Logo from '../Images/New Logo svg.svg'
+import Logow from '../Images/Logosignup.png'
 import Img1 from '../Images/WRITE YOUR TRAVELS.png'
 import Img2 from '../Images/that-s-her-business-R4sP8_Bq0Bw-unsplash.jpg'
 import Img3 from '../Images/redd-francisco-wtZ5QoTEI88-unsplash.jpg'
@@ -9,180 +9,400 @@ import Img5 from '../Images/Logo transpa.png'
 import Img6 from '../Images/logo final.png'
 import Img7 from '../Images/logo bigger.png'
 import Img8 from '../Images/logo final svg.svg'
-
+import Img10 from '../Images/angelo-moleele-s2WxsnxeRc4-unsplash.jpg'
+import Img0 from '../Images/photo-1691322682852-6f3b5421d2fa.avif'
+import { Box,Link, Typography, List, Grid } from '@mui/material'
 
 const Homecode = () => {
   return (
     <>
-    <section>
-    <div className={classes.wrapper}>
-        <header>
-            <div className={classes.logo}>
-                <img src={Logo} className="protected" alt="Journal Jot Logo" loading="lazy" width="70px" />
-            </div>
+    <Box
+    component="img"
+     src={Img2} alt='bg'
+    sx = {{maxHeight: '70vh', width: '100%', objectFit: 'cover'}}>
+        
+    </Box>
+    <Box className="slogan" sx={{ position: 'absolute', top: '390px', left: '20px' }}>
+        <img
+          src={Img1}
+          alt="slogan"
+          className="protected"
+          width="250px"
+          height="100px"
+          loading="lazy"
+        />
+      </Box>
 
-                <div className={classes.links}>
-                    <ul className={classes.sidebar}>
-                        <li><a href="#">home</a></li>
-                        <li><a href="Travel-Gallery/gallery.html" target="_blank" rel="noopener noreferrer">journal</a></li>
-                        <li><a href="Login Page/account.html#loginForm">account</a></li>
-                        <li><a href="#connect">contact</a></li>
-                        </ul>
-                </div>  
-                
-                <div className={classes.acctUser}>
-                    <a href="ProfilePage/profile.html" className={classes.loginlink}><img src="../Images/user-rounded.svg" alt="" width="40px" loading="lazy" title="Profile"/></a>
-                </div>
+      {/* Sections */}
+      <Box>
+        {/* Name Section */}
+        <Typography
+          className="name"
+          variant="h3"
+          sx={{
+            textAlign: 'center',
+            paddingTop: '60px',
+            letterSpacing: '45px',
+            fontFamily: '"Dancing Script"',
+            fontSize: '24px',
+          }}
+        >
+          JournalJot
+        </Typography>
 
-                <div className={classes.slogan}>
-                    <img src={Img1} className="protected" alt="slogan" loading="lazy" width="250px" height="100px"/>
-                </div>          
-        </header>
+        {/* Get Started Section */}
+        <Grid container spacing={3} sx={{ padding: '0 20px',  alignItems: 'center', marginTop: '90px', width: '100%' }}>
+          <Grid sx={{width: '50%'}} item xs={12} md={6}>
+            <Box className="about" sx={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="h4">Start your travel journal adventure!</Typography>
+              <Typography sx={{ paddingTop: '10px', lineHeight: '1.8' }}>
+                Journal Jot is a digital travel diary that lets you capture your adventures with stories, photos, and maps—all in one place...
+              </Typography>
+              <Link href="#" sx={{ color: '#0069ff', fontWeight: 'bold', textDecoration: 'none' }}>
+                Learn more
+              </Link>
+            </Box>
+          </Grid>
+          <Grid sx={{width: '40%'}} item xs={12} md={6}>
+            <Box   className="aboutimg">
+              <img
+                src={Img10}
+                alt="about-img"
+                loading="lazy"
+                style={{ borderRadius: '20px', width: '100%', height: '300px', objectFit: 'cover' }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
 
-        <section className={classes.next}>
-            <div className={classes.name}>
-                <p>JournalJot</p>
-            </div>
+        {/* Create Section */}
+        <Grid container sx={{ margin: '40px 20px', marginLeft: '60px', alignItems: 'stretch', borderRadius: '2rem', height: '340px', width: '90%',  overflow: 'hidden' }}>
+          <Grid sx={{width: '70%',  }} item xs={12} md={6}>
+            <Box
+              className="createbox"
+              sx={{
+                padding: '10px',
+                backgroundColor: '#4A2102',
+                color: 'white',
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography variant="h4">Transform your adventure into a travel book</Typography>
+              <Typography sx={{ paddingTop: '20px', lineHeight: '1.7' }}>
+                Just returned from your travels? Turn your favorite memories into a stunning printed keepsake with Journal Jot...
+              </Typography>
+              <Link href="#" sx={{ color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '18px', marginTop: '2px' }}>
+                NEW +
+              </Link>
+            </Box>
+          </Grid>
+          <Grid sx={{width: '350px'}} item xs={12} md={6}>
+            <Box sx={{height: '100%'}} className="createimg">
+              <img
+                src={Img3}
+                alt="create-img"
+                loading="lazy"
+                style={{ width: '100%', height: '100%', borderRadius: '0px 0px 20px 20px', objectFit: 'cover' }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
 
-            <section className={classes.getStarted}>
-                <div className={classes.about}>
-                    <h3>Start your travel journal adventure!</h3>
-                    <p>Journal Jot is a digital travel diary that lets you capture your adventures with stories, photos, and maps—all in one place. Its online editor is designed to feel like you’re writing in a real book. Personalize your journal with various layouts and style options to match your unique travel vibe!
-                    </p>
-                    <a href="#">Learn more</a>
-                </div>
-                <div className={classes.aboutimg}>
-                    <img src={Img2} alt="about-img" loading="lazy" width="400px" />
-                </div>
-            </section>
+        {/* Join Section */}
+        <Grid
+          container
+          sx={{
+            margin: '40px 20px',
+            alignItems: 'stretch',
+            backgroundColor: '#4A2102',
+            borderRadius: '2rem',
+            width: '87%',
+            marginLeft: '60px',
+            color: 'white',
+            padding: '30px',
+          }}
+        >
+          <Grid sx={{width: '50%'}} item xs={12} md={6}>
+            <Box className="join-txt" sx={{ padding: '1rem', display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="h4">Join us today</Typography>
+              {[
+                'Craft your memories seamlessly using our intuitive online editor...',
+                'Bring your adventures to life by uploading photos...',
+                'Tailor every detail with customizable fonts...',
+                'Enrich your narrative by adding dynamic maps...',
+              ].map((item, idx) => (
+                <Typography
+                  key={idx}
+                  sx={{
+                    lineHeight: '1.8',
+                    marginBottom: '10px',
+                  }}
+                >
+                  🌍 {item}
+                </Typography>
+              ))}
+              <Link
+                href="/Signuppage"
+                sx={{
+                    display: 'flex',
+                  textDecoration: 'none',
+                  textTransform: 'uppercase',
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100px',
+                  height: '40px',
+                  padding: '5px',
+                  marginTop: '20px',
+                  borderRadius: '15px',
+                  color: '#4A2102',
+                  backgroundColor: 'white',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  '%:hover' : {
+                    color: 'white',
+                    backgroundColor: '#4A2102',
+                     transition: '0.3s ease-in-out'
+                  }
+                }}
+              >
+                Sign up
+              </Link>
+            </Box>
+          </Grid>
+          <Grid sx={{width: '10%'}} item xs={12} md={6}>
+            <Box >
+              <img
+                src={Logow}
+                alt="Journal Jot logo"
+                loading="lazy"
+                style={{ width: '80%' }}
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
 
-            <p id="mem">Your memories forever safe</p>
-            <section className={classes.create}>
-                <div className={classes.createbox}>
-                    <h3>Transform your adventure into a travel book</h3>
-                    <p>
-                        Just returned from your travels? Turn your favorite memories into a stunning printed keepsake with Journal Jot. From scenic landscapes to exciting adventures, relive every special moment in a beautifully crafted book—exactly how you lived it.
-                    </p>
-                    <a href="#">NEW +</a>
-                </div>
-                <div className={classes.createimg}>
-                    <img src={Img3} alt="create-img" loading="lazy" />
-                </div>
-            </section>
+      <Box
+      component="footer"
+      sx={{
+        backgroundColor: 'black',
+        color: '#ecf0f1',
+        padding: '40px 0 0',
+        fontFamily: "'Raleway', 'Open Sans', sans-serif",
+      }}
+    >
+      {/* Footer Container */}
+      <Box
+        className="footer-container"
+        sx={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '30px',
+          padding: '0 20px',
+        }}
+      >
+        {/* Logo Section */}
+        <Box className="footer-logo" sx={{ flex: '1 1 100%' }}>
+          <img
+            src= {Logo}
+            alt="Journal Jot Logo"
+            width="100px"
+            loading="lazy"
+            style={{ marginBottom: '15px' }}
+          />
+          <Typography
+            sx={{
+              fontStyle: 'italic',
+              color: '#bdc3c7',
+              lineHeight: 1.6,
+            }}
+          >
+            Write Your Travels, Relive the Moments
+          </Typography>
+        </Box>
 
+        {/* Links Section */}
+        <Box
+          className="footer-links"
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '70px',
+            width: '100%',
+          }}
+        >
+          {/* Navigation Links */}
+          <Box className="link-group" sx={{ flex: '1 1 auto' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#f1c40f',
+                marginBottom: '20px',
+                fontSize: '1.2rem',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}
+            >
+              Navigation
+            </Typography>
+            <Box component="ul" sx={{ listStyle: 'none', padding: 0 }}>
+              {['Home', 'Journals', 'Account', 'Contact', 'Profile'].map((item, idx) => (
+                <Box component="li" key={idx} sx={{ marginBottom: '10px' }}>
+                  <Link
+                    href={
+                      item === 'Journals'
+                        ? 'Travel-Gallery/gallery.html'
+                        : item === 'Account'
+                        ? 'Login Page/account.html'
+                        : item === 'Profile'
+                        ? 'ProfilePage/profile.html'
+                        : '#'
+                    }
+                    sx={{
+                      color: '#ecf0f1',
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                      '&:hover': {
+                        color: '#f1c40f',
+                      },
+                    }}
+                  >
+                    {item}
+                  </Link>
+                </Box>
+              ))}
+            </Box>
+          </Box>
 
-            <p id="mem">Join the community</p>
-            <section className={classes.join}>
-                <div className={classes.jointxt}>
-                    <h3>Join us today</h3>
-                    <ul className={classes.globelist}>
-                        <li>Craft your memories seamlessly using our intuitive online editor or mobile app, designed to mimic the elegant appearance of a physical book.</li>
-                        <li>Bring your adventures to life by uploading photos and selecting from versatile page layouts.</li>
-                        <li>Tailor every detail with customizable fonts, colors, and styling options to reflect your personal flair.</li>
-                        <li>Enrich your narrative by adding dynamic maps, interactive elements, and specially designed spaces to showcase tickets, photos, and other cherished souvenirs.
-                        </li>
-                    </ul>
-                    <a href="#">sign up</a>
-                    {/* <!-- <button type="button">sign up</button> --> */}
-                </div>
-                <div className={classes.img}>
-                    <img src={Img4} alt="Journal Jot logo" width="300px" loading="lazy"/>
-                </div>
-            </section>
+          {/* Resources Links */}
+          <Box className="link-group" sx={{ flex: '1 1 auto' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#f1c40f',
+                marginBottom: '20px',
+                fontSize: '1.2rem',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}
+            >
+              Resources
+            </Typography>
+            <Box component="ul" sx={{ listStyle: 'none', padding: 0 }}>
+              {['Travel Tips', 'Packing Lists', 'Destination Guides'].map((item, idx) => (
+                <Box component="li" key={idx} sx={{ marginBottom: '10px' }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      color: '#ecf0f1',
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                      '&:hover': {
+                        color: '#f1c40f',
+                      },
+                    }}
+                  >
+                    {item}
+                  </Link>
+                </Box>
+              ))}
+            </Box>
+          </Box>
 
+          {/* Connect Links */}
+          <Box className="link-group" sx={{ flex: '1 1 auto' }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: '#f1c40f',
+                marginBottom: '20px',
+                fontSize: '1.2rem',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}
+            >
+              Connect
+            </Typography>
+            <Box component="ul" sx={{ listStyle: 'none', padding: 0 }}>
+              {[
+                { name: 'Instagram', icon: 'bx bxl-instagram' },
+                { name: 'Facebook', icon: 'bx bxl-facebook' },
+                { name: 'Twitter', icon: 'bx bxl-twitter' },
+                { name: 'Pinterest', icon: 'bx bxl-pinterest' },
+              ].map((item, idx) => (
+                <Box component="li" key={idx} sx={{ marginBottom: '10px' }}>
+                  <Link
+                    href="#"
+                    sx={{
+                      color: '#ecf0f1',
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      '&:hover': {
+                        color: '#f1c40f',
+                      },
+                    }}
+                  >
+                    <i className={item.icon} style={{ marginRight: '8px', fontSize: '1.1rem' }}></i>
+                    {item.name}
+                  </Link>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-            <p id={classes.final}>Our users love Journal Jot</p>
-            <section className={classes.reviews}>
+      {/* Footer Bottom */}
+      <Box
+        className="footer-bottom"
+        sx={{
+          backgroundColor: '#1a252f',
+          padding: '20px 0',
+          textAlign: 'center',
+          marginTop: '40px',
+        }}
+      >
+        <Typography
+          sx={{
+            margin: 0,
+            color: '#bdc3c7',
+            fontSize: '0.9rem',
+          }}
+        >
+          &copy; 2025 JournalJot. All rights reserved. |{' '}
+          <Link
+            href="#"
+            sx={{
+              color: '#f1c40f',
+              textDecoration: 'none',
+            }}
+          >
+            Privacy Policy
+          </Link>{' '}
+          |{' '}
+          <Link
+            href="#"
+            sx={{
+              color: '#f1c40f',
+              textDecoration: 'none',
+            }}
+          >
+            Terms of Service
+          </Link>
+        </Typography>
+      </Box>
+    </Box>
     
-                <div className={classes.Cmtblk}>
-                    <div className={classes.user}>
-                        <img src={Img5} alt="user1" loading="lazy"/>Lilian
-                    </div>
-                    <div className={classes.comment}>
-                        Journal Jot is fantastic! Simple, intuitive interface. Loved mapping my trips and adding photos. Easy to share with friends, too. Highly recommend for any traveler wanting to document their adventures.
-                    </div>
-                    <div className={classes.rating}>
-                        <p>⭐⭐⭐⭐⭐</p>
-                    </div>
-                </div>
-
-
-                <div className={classes.Cmtblk}>
-                    <div className={classes.user}>
-                        <img src={Img6} alt="user2" loading="lazy"/>Jessica
-                    </div>
-                    <div className={classes.comment}>
-                        Absolutely loved Journal Jot! Effortlessly captured my journey with its intuitive design. The map integration is brilliant, and sharing was a breeze. A fantastic way to relive my travels. Five stars!
-                    </div>
-                    <div className={classes.rating}>
-                        <p> ⭐⭐⭐⭐⭐</p>
-                    </div>
-                </div>
-
-
-                <div className={classes.Cmtblk}>
-                    <div className={classes.user}>
-                        <img src={Img7} alt="user3" loading="lazy"/>Bob
-                    </div>
-                    <div className={classes.comment}>
-                        As a frequent traveler, Journal Jot streamlined my record-keeping. Easy photo uploads, and the map feature is top-notch. Finally, a journal that keeps up! Simple, practical, and a great way to revisit adventures.
-                    </div>
-                    <div className={classes.rating}>
-                        <p>⭐⭐⭐⭐⭐</p>
-                    </div>
-                </div>
-            </section>
-
-        </section>
-
-        
-        
-        <footer className={classes.sitefooter}>
-            <div className={classes.footercontainer}>
-            <div className={classes.footerlogo}>
-                <img src={Img8} className="protected" alt="Journal Jot Logo" width="100px" loading="lazy"/>
-                <p>Write Your Travels, Relive the Moments</p>
-            </div>
-            
-            <div className={classes.footerlinks}>
-                <div className={classes.linkgroup}>
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="Travel-Gallery/gallery.html">Journals</a></li>
-                    <li><a href="Login Page/account.html">Account</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Places</a></li>
-                </ul>
-                </div>
-                
-                <div className={classes.linkgroup}>
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#">Travel Tips</a></li>
-                    <li><a href="#">Packing Lists</a></li>
-                    <li><a href="#">Destination Guides</a></li>
-                </ul>
-                </div>
-                
-                <div className={classes.linkgroup}>
-                <h3>Connect</h3>
-                <ul className={classes.sociallinks} id="connect">
-                    <li><a href="#"><i className='bx bxl-instagram'></i> Instagram</a></li>
-                    <li><a href="#"><i className='bx bxl-facebook'></i> Facebook</a></li>
-                    <li><a href="#"><i className='bx bxl-twitter'></i> Twitter</a></li>
-                    <li><a href="#"><i className='bx bxl-pinterest'></i> Pinterest</a></li>
-                </ul>
-                </div>
-            </div>
-            </div>
-            
-            <div className={classes.footerbottom}>
-            <p>&copy; 2025 JournalJot. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
-            </footer>
-    </div>
-</section>
+    
     </>
   )
 }
