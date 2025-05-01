@@ -109,12 +109,7 @@ const handleClick = async (e) => {
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
-          city: journals.city,
-          country: journals.country,
-          district: journals.district,
           
-          latitude: journals.latitude,
-          longitude: journals.longitude
         }, 
 
     {
