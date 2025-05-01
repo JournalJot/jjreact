@@ -103,18 +103,24 @@ const handleChange = (e) => {
 const handleClick = async (e) => {
     e.preventDefault();
     //send to backend here
+    setJournals((prevState) => ({
+        ...prevState,
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+        city: userLocation.city || prevState.city,
+        country: userLocation.country || prevState.country,
+        district: userLocation.district || prevState.district,
+    }));
+
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', {
             
-          email: journals.email,
-          journal_title: journals.journal_title,
-          journal_body: journals.journal_body,
-          city: journals.city,
-          country: journals.country,
-          district: journals.district,
-          travel_pic: journals.travel_pic,
-          latitude: journals.latitude,
-          longitude: journals.longitude
+          ...journals,
+                    latitude: userLocation.latitude, // Ensure latitude is from userLocation
+                    longitude: userLocation.longitude,
+                    city: userLocation.city || journals.city,
+                    country: userLocation.country || journals.country,
+                    district: userLocation.district || journals.district,
         }, 
 
     {
