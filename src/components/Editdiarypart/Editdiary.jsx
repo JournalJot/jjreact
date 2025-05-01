@@ -28,7 +28,7 @@ const Editdiary = () => {
         city: "",
         country: "",
         district: "",
-        travel_pic: "",
+        
         latitude: "",
         longitude: ""
     })
@@ -59,7 +59,7 @@ const Editdiary = () => {
         city: "",
         country: "",
         district: "",
-        travel_pic: "",
+        
         latitude: "",
         longitude: ""})
         }
@@ -112,7 +112,7 @@ const handleClick = async (e) => {
           city: journals.city,
           country: journals.country,
           district: journals.district,
-          travel_pic: journals.travel_pic,
+          
           latitude: journals.latitude,
           longitude: journals.longitude
         }, 
