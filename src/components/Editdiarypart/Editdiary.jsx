@@ -117,7 +117,7 @@ const handleClick = async (e) => {
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', 
             
-            JSON.stringify(updatedJournals),
+            JSON.parse(updatedJournals),
          
 
     {
