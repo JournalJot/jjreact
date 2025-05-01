@@ -103,25 +103,22 @@ const handleChange = (e) => {
 const handleClick = async (e) => {
     e.preventDefault();
     //send to backend here
-    setJournals((prevState) => ({
-        ...prevState,
+    const updatedJournals = {
+        ...journals,
         latitude: userLocation.latitude,
         longitude: userLocation.longitude,
-        city: userLocation.city || prevState.city,
-        country: userLocation.country || prevState.country,
-        district: userLocation.district || prevState.district,
-    }));
+        city: userLocation.city || journals.city,
+        country: userLocation.country || journals.country,
+        district: userLocation.district || journals.district,
+    };
 
+    console.log("User Location before POST:", userLocation);
+    console.log("Journals before POST:", updatedJournals);
     try{
-        const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', {
+        const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', 
             
-          ...journals,
-                    latitude: userLocation.latitude, // Ensure latitude is from userLocation
-                    longitude: userLocation.longitude,
-                    city: userLocation.city || journals.city,
-                    country: userLocation.country || journals.country,
-                    district: userLocation.district || journals.district,
-        }, 
+          updatedJournals,
+         
 
     {
                 headers: {
