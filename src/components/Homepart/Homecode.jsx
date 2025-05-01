@@ -174,13 +174,13 @@ const Homecode = () => {
               </Link>
             </Box>
           </Grid>
-          <Grid sx={{width: '10%'}} item xs={12} md={6}>
+          <Grid sx={{width: '40%'}} item xs={12} md={6}>
             <Box >
               <img
                 src={Logow}
                 alt="Journal Jot logo"
                 loading="lazy"
-                style={{ width: '80%' }}
+                style={{ width: '70%' }}
               />
             </Box>
           </Grid>
