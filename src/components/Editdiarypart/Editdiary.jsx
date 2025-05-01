@@ -33,7 +33,7 @@ const Editdiary = () => {
         longitude: ""
     })
     const fetchLocation = async () => {
-        const response = await axios.get("https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/location")
+        const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location")
         try{
             setUserLocation(response.data);
             console.log(response.data.longitude)
@@ -43,7 +43,7 @@ const Editdiary = () => {
         }
     }
     const fetchApi = async () => {
-        const response = await axios.get("https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/journal");
+        const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal");
         try{
         setJournals(response.data);
         console.log(response.data.longitude);
@@ -100,7 +100,7 @@ const handleClick = async (e) => {
     e.preventDefault();
     //send to backend here
     try{
-        const response = await axios.post('https://jj-server-irokshvwx-thunderarbys-projects.vercel.app/api/journal', {
+        const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', {
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
