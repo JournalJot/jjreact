@@ -86,7 +86,7 @@ const showMyLocattion = () => {
     console.log(userLocation.longitude)
     console.log(userLocation.location)
     if( location.loaded && !location.error ){
-        mapRef.current.leafletElement.flyTo([userLocation.location.latitude,userLocation.location.longitude], 13, {animate: true});
+        mapRef.current.leafletElement.flyTo([journals.latitude,journals.longitude], 13, {animate: true});
     } else{
         alert(location.error.message);
     }
@@ -105,9 +105,9 @@ const handleClick = async (e) => {
     //send to backend here
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+            headers: {
+                'Content-Type': 'application/json',
+              },
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
@@ -169,7 +169,7 @@ const handleClick = async (e) => {
                         <MapContainer center={markers} zoom={13} ref={mapRef}>
                             <TileLayer attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"  />
-                            <Marker position={[userLocation.location.latitude, userLocation.location.longitude]} icon={customIcon}></Marker>
+                            <Marker position={[journals.latitude, journals.longitude]} icon={customIcon}></Marker>
                             {/* {location.loaded && !location.error && (
                                 <Marker position={[location.coordinates.lat, location.coordinates.lng]} icon={customIcon}></Marker>
                             )}   this was for geolocation*/}
@@ -177,7 +177,7 @@ const handleClick = async (e) => {
                         
                     </div>
 
-                    <div className={classes.mapinfo}><h1 className={classes.maphead}>{userLocation.location.country},{userLocation.location.city},{userLocation.location.district}</h1><button onClick={showMyLocattion} className={classes.mapbut}>Find me</button></div>
+                    <div className={classes.mapinfo}><h1 className={classes.maphead}>{journals.country},{journals.city},{journals.district}</h1><button onClick={showMyLocattion} className={classes.mapbut}>Find me</button></div>
                 </div>
             </div>
             <button className={classes.mapbut} onClick={handleClick}>Submit</button>
