@@ -111,12 +111,12 @@ const handleClick = async (e) => {
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
-          city: journals.city,
-          country: journals.country,
-          district: journals.district,
-          travel_pic: journals.travel_pic,
-          latitude: journals.latitude,
-          longitude: journals.longitude
+          city: userLocation.location.city,
+          country: userLocation.location.country,
+          district: userLocation.location.district,
+          travel_pic: userLocation.location.travel_pic,
+          latitude: userLocation.location.latitude,
+          longitude: userLocation.location.longitude
         });setMessage(response.data.message);
     } catch (error) {
       setMessage(error.response?.data?.message || "Creation error");
