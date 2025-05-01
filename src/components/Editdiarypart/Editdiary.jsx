@@ -35,10 +35,10 @@ const Editdiary = () => {
     const fetchLocation = async () => {
         const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location")
         try{
-            const data = JSON.parse(JSON.stringify(response.data));
-            setUserLocation(data);
-            console.log(data.longitude)
-            console.log(data.latitude)
+            
+            setUserLocation(response.data);
+            console.log(response.data.longitude)
+            console.log(response.data.latitude)
         } catch {
             console.log("error")
         }
@@ -46,12 +46,12 @@ const Editdiary = () => {
     const fetchApi = async () => {
         const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal");
         try{
-        const data = JSON.parse(JSON.stringify(response.data));
+        
 
 
-        setJournals(data);
-        console.log(data.longitude);
-        console.log(data.latitude);
+        setJournals(response.data);
+        console.log(response.data.longitude);
+        console.log(response.data.latitude);
         } catch{    
         setJournals({email: "john@gmail.com",
         journal_title: "",
@@ -133,7 +133,7 @@ const handleClick = async (e) => {
     
     
     console.log(journals.latitude)
-    console.log("Form submitted:", JSON.parse(updatedJournals));
+    console.log("Form submitted:", updatedJournals);
 };
 
 
