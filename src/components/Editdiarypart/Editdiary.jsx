@@ -105,19 +105,24 @@ const handleClick = async (e) => {
     //send to backend here
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', {
-            headers: {
-                'Content-Type': 'application/json',
-              },
+            
           email: journals.email,
           journal_title: journals.journal_title,
           journal_body: journals.journal_body,
-          city: userLocation.location.city,
-          country: userLocation.location.country,
-          district: userLocation.location.district,
-          travel_pic: userLocation.location.travel_pic,
-          latitude: userLocation.location.latitude,
-          longitude: userLocation.location.longitude
-        });setMessage(response.data.message);
+          city: journals.city,
+          country: journals.country,
+          district: journals.district,
+          travel_pic: journals.travel_pic,
+          latitude: journals.latitude,
+          longitude: journals.longitude
+        }, 
+
+    {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        ); setMessage(response.data.message);
     } catch (error) {
       setMessage(error.response?.data?.message || "Creation error");
     }
