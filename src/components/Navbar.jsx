@@ -44,7 +44,7 @@ const Navbar = () => {
           }}
         >
           <Link
-            href="#"
+            to = '/'
             underline="none"
             sx={{
               color: '#6A2B00',
@@ -67,7 +67,7 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            href="Travel-Gallery/gallery.html"
+            to = '/Journalspage'
             target="_blank"
             rel="noopener noreferrer"
             underline="none"
@@ -91,7 +91,7 @@ const Navbar = () => {
             Journal
           </Link>
           <Link
-            href="Login Page/account.html#loginForm"
+            to="/ProfilePage"
             underline="none"
             sx={{
               color: '#6A2B00',
@@ -113,7 +113,7 @@ const Navbar = () => {
             Account
           </Link>
           <Link
-            href="#connect"
+            href="#footer"
             underline="none"
             sx={{
               color: '#6A2B00',
@@ -132,7 +132,7 @@ const Navbar = () => {
               },
             }}
           >
-            Contact
+            About
           </Link>
           <Link
             href="ProfilePage/profile.html"
