@@ -10,6 +10,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import useGeoLocation from './useGeoLocation'
 import axios from 'axios';
 
+axios.defaults.headers.common["Content-Type"] = "application/json";
+
 const Editdiary = () => {
     var [markers, setMarkers] = useState({lat: 48.88, lng:2.355})
     const mapRef = useRef();
@@ -147,15 +149,6 @@ const handleChange = (e) => {
       
   return (
     <><section className={classes.container}>
-    <div className={classes.navcont}>
-        <div className={classes.logo}>{Logo}</div>
-        <ul className={classes.navbar}>
-            <li className={classes.navlist}><Link to='/' className={classes.navlink}>HOME</Link></li>
-            <li className={classes.navlist}><Link to='' className={classes.navlink}>JOURNAL</Link></li>
-            <li className={classes.navlist}><Link to='/Loginpage' className={classes.navlink}>LOG IN</Link></li>
-            <li className={classes.navlist}><Link to='/' className={classes.navlink}>CONTACT</Link></li>
-        </ul>
-    </div>
     <div className={classes.bodycont}>
         <div className={classes.innerbody}>
             <input
