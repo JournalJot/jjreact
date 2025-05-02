@@ -32,7 +32,11 @@ const Signup = () => {
               name: formData.username,
               email: formData.email,
               password: formData.password
-            });setMessage(response.data.message);
+            },
+            {
+              headers: {"Content-Type": "application/json",},
+            }
+          );setMessage(response.data.message);
         } catch (error) {
           setMessage(error.response?.data?.message || "Login failed");
         }
