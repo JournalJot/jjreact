@@ -28,11 +28,7 @@ const Signup = () => {
         e.preventDefault();
         //send to backend here
         try{
-            const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/user', {
-              name: formData.username,
-              email: formData.email,
-              password: formData.password
-            },
+            const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/user', formData,
             {
               headers: {"Content-Type": "application/json",},
             }
