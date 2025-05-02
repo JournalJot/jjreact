@@ -44,7 +44,7 @@ const Navbar = () => {
           }}
         >
           <Link
-            to = '/'
+            href = '/'
             underline="none"
             sx={{
               color: '#6A2B00',
@@ -67,7 +67,7 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to = '/Journalspage'
+            href = '/Journalspage'
             target="_blank"
             rel="noopener noreferrer"
             underline="none"
@@ -91,7 +91,7 @@ const Navbar = () => {
             Journal
           </Link>
           <Link
-            to="/ProfilePage"
+            href="/ProfilePage"
             underline="none"
             sx={{
               color: '#6A2B00',
