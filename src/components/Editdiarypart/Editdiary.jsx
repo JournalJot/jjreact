@@ -117,13 +117,13 @@ const handleClick = async (e) => {
     try{
         const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', 
             
-            JSON.parse(updatedJournals),
+            updatedJournals,
          
 
     {
                 headers: {
-                    "Content-Type": "application/json"
-                }
+                    "Content-Type": "application/json",
+                },
             }
         ); setMessage(response.data.message);
     } catch (error) {
