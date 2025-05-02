@@ -100,40 +100,47 @@ const handleChange = (e) => {
     }));
   };
 
-const handleClick = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    //send to backend here
-    const updatedJournals = {
-        ...journals,
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        city: userLocation.city || journals.city,
-        country: userLocation.country || journals.country,
-        district: userLocation.district || journals.district,
-    };
 
-    console.log("User Location before POST:", userLocation);
-    console.log("Journals before POST:", updatedJournals);
-    try{
-        const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal', 
-            
+    try {
+        // Step 1: Fetch location data
+        const locationResponse = await axios.get(
+            "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location"
+        );
+        const locationData = locationResponse.data;
+
+        console.log("Fetched Location Data:", locationData);
+
+        // Step 2: Merge location data into journal data
+        const updatedJournals = {
+            ...journals,
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            city: locationData.city || journals.city,
+            country: locationData.country || journals.country,
+            district: locationData.district || journals.district,
+        };
+
+        console.log("Updated Journal Data:", updatedJournals);
+
+        // Step 3: Post the updated journal data
+        const response = await axios.post(
+            "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal",
             updatedJournals,
-         
-
-    {
+            {
                 headers: {
                     "Content-Type": "application/json",
                 },
             }
-        ); setMessage(response.data.message);
+        );
+
+        setMessage(response.data.message);
+        console.log("Journal Created Successfully:", response.data.message);
     } catch (error) {
-      setMessage(error.response?.data?.message || "Creation error");
+        setMessage(error.response?.data?.message || "Error occurred while creating the journal");
+        console.error("Error:", error);
     }
-    // Form submission logic here
-    
-    
-    console.log(journals.latitude)
-    console.log("Form submitted:", updatedJournals);
 };
 
 
