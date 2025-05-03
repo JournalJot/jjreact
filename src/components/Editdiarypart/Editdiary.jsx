@@ -16,13 +16,11 @@ const Editdiary = () => {
     var [markers, setMarkers] = useState({lat: 48.88, lng:2.355})
     const mapRef = useRef();
     const [message, setMessage] = useState("Error");
-    const [userLocation, setUserLocation] = useState ("")
+    const [userLocation, setUserLocation] = useState ([0,0]);
 
-    console.log(message);
 
-    if(!markers){
-        setMarkers({lat: "", lng: ""})
-    }
+
+
     const[journals, setJournals] = useState({
         email: "john@gmail.com",
         journal_title: "",
@@ -31,45 +29,43 @@ const Editdiary = () => {
         country: "",
         district: "",
         travel_pic: "",
-        latitude: "",
-        longitude: ""
+        latitude: 48.88,
+        longitude: 2.355
     })
     const fetchLocation = async () => {
-        const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location")
         try{
+            const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location");
+            console.log(response.data);
             
-            setUserLocation(response.data);
-            console.log(response.data.longitude)
-            console.log(response.data.latitude)
+            setJournals((prevState) => ({
+                ...prevState,
+                latitude: response.data.location.latitude,
+                longitude: response.data.location.longitude,
+                city: response.data.location.city,
+                country: response.data.location.country,
+                district: response.data.location.district,
+            }));
+            setMarkers({lat: response.data.location.latitude, lng: response.data.location.longitude})
+            console.log(response.data.location.longitude)
+            console.log(response.data.location.latitude)
         } catch {
             console.log("error")
         }
     }
-    const fetchApi = async () => {
-        const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal");
-        try{
-        
+    // const fetchApi = async () => {
+    //     try{
+    //     const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal")
 
-
-        setJournals(response.data);
-        console.log(response.data.longitude);
-        console.log(response.data.latitude);
-        } catch{    
-        setJournals({email: "john@gmail.com",
-        journal_title: "",
-        journal_body: "",
-        city: "",
-        country: "",
-        district: "",
-        travel_pic: "../Images/logo bigger.png",
-        latitude: "",
-        longitude: ""})
-        }
-    }
+    //     setJournals(response.data);
+    //     console.log(response.data);
+    //     } catch(error){
+    //         console.log(error)
+    //     }
+    // }
 
 
     useEffect(() => {
-        fetchApi();
+        // fetchApi();
         fetchLocation();
         
     },[])
@@ -85,13 +81,8 @@ const location = useGeoLocation();
 
 //function to fly to to my location
 const showMyLocattion = () => {
-    console.log(userLocation.longitude)
-    console.log(userLocation.location)
-    if( location.loaded && !location.error ){
         mapRef.current.leafletElement.flyTo([journals.latitude,journals.longitude], 13, {animate: true});
-    } else{
-        alert(location.error.message);
-    }
+
 }
 
 const handleChange = (e) => {
@@ -104,45 +95,20 @@ const handleChange = (e) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+        console.log("Journals:",JSON.stringify(journals));
 
-    try {
-        // Step 1: Fetch location data
-        const locationResponse = await axios.get(
-            "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location"
-        );
-        const locationData = locationResponse.data;
-
-        console.log("Fetched Location Data:", locationData);
-
-        // Step 2: Merge location data into journal data
-        const updatedJournals = {
-            ...journals,
-            latitude: locationData.latitude,
-            longitude: locationData.longitude,
-            city: locationData.city || journals.city,
-            country: locationData.country || journals.country,
-            district: locationData.district || journals.district,
-        };
-
-        console.log("Updated Journal Data:", updatedJournals);
-
-        // Step 3: Post the updated journal data
         const response = await axios.post(
             "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal",
-            updatedJournals,
+            journals,
             {
                 headers: {
                     "Content-Type": "application/json",
                 },
             }
         );
-
-        setMessage(response.data.message);
+        console.log("Response:", response.data);
         console.log("Journal Created Successfully:", response.data.message);
-    } catch (error) {
-        setMessage(error.response?.data?.message || "Error occurred while creating the journal");
-        console.error("Error:", error);
-    }
+  
 };
 
 
