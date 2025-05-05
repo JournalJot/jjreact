@@ -6,21 +6,33 @@ import axios from 'axios'
 import { useState } from 'react'
 import Journalcard from './Journalcard'
 
+
 const Journals = () => {
 
-  const [formData, setFormData] = useState({
-          email: "",
-          Journal_Body: "",
-          Journal_Title: "",
-          Travel_Pic: "",
-          Country: "",
-          City: "",
-          District: "",
-          Latitude:"",
-      });
+  // const [formData, setFormData] = useState({
+  //         email: "",
+  //         Journal_Body: "",
+  //         Journal_Title: "",
+  //         Travel_Pic: "",
+  //         Country: "",
+  //         City: "",
+  //         District: "",
+  //         Latitude:"",
+  //     });
+
+    const [formData, setFormData] = useState([{
+      email: "",
+      Journal_Body: "",
+      Journal_Title: "",
+      Travel_Pic: "",
+      Country: "",
+      City: "",
+      District: "",
+      Latitude:"",
+  }]);
 
       const fetchApi = async () => {
-        const response = await axios.get("http://127.0.0.1:5000/api/journals");
+        const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journals");
         setFormData(response.data);
         console.log(response.data.name);
     }
@@ -57,8 +69,18 @@ const Journals = () => {
         </div>
 
         <div className={classes.cardsContainer}>
-          {/* Card 1 */}
-          <Journalcard />
+          {/* Card */}
+          {formData.map((data, index) => (
+              <Journalcard
+                key={index}
+                title={data.Journal_Title}
+                body={data.Journal_Body}
+                travelPic={data.Travel_Pic}
+                country={data.Country}
+                city={data.City}
+                district={data.District}
+              />
+            ))}
         </div>
     </main>
     </section>

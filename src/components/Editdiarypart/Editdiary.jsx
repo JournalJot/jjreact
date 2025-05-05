@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import classes from './Editdiary.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../Images/logo bigger.png'
 import {Icon} from "leaflet";
 import cusicon from "./image.png"
@@ -16,8 +16,7 @@ const Editdiary = () => {
     var [markers, setMarkers] = useState({lat: 48.88, lng:2.355})
     const mapRef = useRef();
     const [message, setMessage] = useState("Error");
-    const [userLocation, setUserLocation] = useState ([0,0]);
-
+    const navigate = useNavigate();
 
 
 
@@ -96,7 +95,7 @@ const handleChange = (e) => {
   const handleClick = async (e) => {
     e.preventDefault();
         console.log("Journals:",JSON.stringify(journals));
-
+        try{
         const response = await axios.post(
             "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal",
             journals,
@@ -108,7 +107,11 @@ const handleChange = (e) => {
         );
         console.log("Response:", response.data);
         console.log("Journal Created Successfully:", response.data.message);
-  
+        navigate("/Journalspage");
+    
+    }catch{
+            console.log("post issue")
+        }
 };
 
 
