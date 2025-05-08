@@ -4,12 +4,14 @@ import { Container, Typography,Box, Button, Input } from '@mui/material';
 import loginbg from "../Images/beautiful-wooden-pathway-going-breathtaking-colorful-trees-forest_181624-5840.jpg.avif"
 import anim from "../Images/workspace-unscreen.gif"
 import usericon from "../Images/user-octagon-svgrepo-com.png"
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,9 +21,9 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    // e.preventDefault();
-    navigate("./Home");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     // Handle login logic here
 
     
@@ -29,6 +31,7 @@ const Login = () => {
   };
 
   return (
+    <>
     <Box
       component="section"
       sx={{
@@ -244,6 +247,7 @@ const Login = () => {
         </Box>
       </Box>
     </Box>
+    </>
   );
 };
 

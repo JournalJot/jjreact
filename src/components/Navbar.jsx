@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar,Toolbar, Box,Link} from '@mui/material'
 import Logo from "../components/Images/New  Logo png.png"
+import prof from "../components/Images/user-octagon-svgrepo-com.png"
 
 const Navbar = () => {
   return (
@@ -135,12 +136,12 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            href="ProfilePage/profile.html"
+            href="/ProfilePage"
             underline="none"
             sx={{
               fontSize: '20px',
-              color: '#6A2B00',
-              
+              display: "flex",
+              width: "40px",
               '&:hover': {
                 color: '#6d3914',
                 transition: '0.3s ease-in-out',
@@ -148,7 +149,7 @@ const Navbar = () => {
             }}
             title="Profile"
           >
-            <img src='../components/Images/workspace.gif' />
+            <img src={prof} style={{width: "70px"}} />
           </Link>
         </Box>
       </Toolbar>

@@ -107,7 +107,7 @@ const Profile = () => {
     
 
     return (
-        <>
+        <> 
         <section className={classes.wcontainer}>
             
                 <div className={classes.logo}>
