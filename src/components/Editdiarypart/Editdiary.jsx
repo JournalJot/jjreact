@@ -33,7 +33,7 @@ const Editdiary = () => {
     })
     const fetchLocation = async () => {
         try{
-            const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/location");
+            const response = await axios.get("https://journaljot-api.onrender.com/api/location");
             console.log(response.data);
             
             setJournals((prevState) => ({
@@ -53,7 +53,7 @@ const Editdiary = () => {
     }
     // const fetchApi = async () => {
     //     try{
-    //     const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal")
+    //     const response = await axios.get("https://journaljot-api.onrender.com/api/journal")
 
     //     setJournals(response.data);
     //     console.log(response.data);
@@ -97,7 +97,7 @@ const handleChange = (e) => {
         console.log("Journals:",JSON.stringify(journals));
         try{
         const response = await axios.post(
-            "https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journal",
+            "https://journaljot-api.onrender.com/api/journal",
             journals,
             {
                 headers: {

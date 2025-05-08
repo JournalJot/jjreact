@@ -28,7 +28,7 @@ const Signup = () => {
         e.preventDefault();
         //send to backend here
         try{
-            const response = await axios.post('https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/user', formData,
+            const response = await axios.post('https://journaljot-api.onrender.com/api/user', formData,
             {
               headers: {"Content-Type": "application/json",},
             }

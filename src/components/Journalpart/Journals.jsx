@@ -27,7 +27,7 @@ const Journals = () => {
   };
 
   const fetchApi = async () => {
-    const response = await axios.get("https://jj-server-thunderarby-thunderarbys-projects.vercel.app/api/journals");
+    const response = await axios.get("https://journaljot-api.onrender.com/api/journals");
     setFormData(response.data);
     console.log(response.data);
   };
