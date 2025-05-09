@@ -91,6 +91,7 @@ const Journals = () => {
             <Grid container spacing={3} justifyContent="center">
               {formData.map((data, index) => (
                 <Journalcard
+                
                   key={index}
                   title={data.Journal_Title}
                   body={data.Journal_Body}
