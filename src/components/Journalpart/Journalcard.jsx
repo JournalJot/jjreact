@@ -1,22 +1,40 @@
-import React from 'react'
-import classes from './Journals.module.css'
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Button, CardActions, Box } from '@mui/material';
+
 const Journalcard = ({ title, body, travelPic, country, city, district }) => {
   return (
-    <>
-    <div className={classes.card}>
-            <h2 className={classes.cardTitle}>{title}</h2>
-            <p className={classes.cardDescription}>
-              {body}
-            </p>
-            <img src={travelPic} alt="Preview" className={classes.cardImage} />
-            <div className={classes.cardLocation}>{country}, {city}, {district} </div>
-            <div className={classes.cardActions}>
-              <button className={classes.actionButton}>Read</button>
-              <button className={classes.actionButton}>View</button>
-            </div>
-          </div>
-    </>
-  )
-}
+    <Card sx={{ maxWidth: 345, margin: '20px', boxShadow: 3 }}>
+      {travelPic && (
+        <CardMedia
+          component="img"
+          height="140"
+          image={travelPic}
+          alt="Travel Preview"
+        />
+      )}
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          {title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {body}
+        </Typography>
+        <Box sx={{ marginTop: 2 }}>
+          <Typography variant="subtitle2" color="text.secondary">
+            {country}, {city}, {district}
+          </Typography>
+        </Box>
+      </CardContent>
+      <CardActions>
+        <Button size="small" variant="contained" color="primary">
+          Read
+        </Button>
+        <Button size="small" variant="outlined" color="secondary">
+          View
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
 
-export default Journalcard
+export default Journalcard;

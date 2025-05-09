@@ -29,29 +29,35 @@ const Journals = () => {
 
   const fetchApi = async () => {
     try {
-      console.log(localStorage.getItem("email"))
-      const response = await axios.get("https://journaljot-api.onrender.com/api/journal?email=" + localStorage.getItem("email"));
-      console.log(response.data.journals[0][1]);
-      
-      setFormData((prevState) => {
-        let obj = response.data.journals.map((data) => {
-          return ({
-            email: data[1],
-            Journal_Title: data[2],
-            Journal_Body: data[3],
-            Travel_Pic: data[4],
-            Country: data[5],
-            City: data[6],
-            District: data[7],
-            Latitude: data[8],
-            longitude: data[9]
-            
-          });
-          
-        });
-        return [prevState, obj];
-      }); // Default to an empty array if no journals are returned
-     
+      const email = localStorage.getItem("email");
+      if (!email) {
+        console.error("No email found in localStorage");
+        return;
+      }
+
+      const response = await axios.get(
+        "https://journaljot-api.onrender.com/api/journal?email=" + email
+      );
+
+      const obj = response.data.journals
+        .map((data) => ({
+          email: data[1],
+          Journal_Title: data[3],
+          Journal_Body: data[2],
+          Travel_Pic: data[4],
+          Country: data[5],
+          City: data[6],
+          District: data[7],
+          Latitude: data[8],
+          longitude: data[9],
+        }))
+        .filter(
+          (item) =>
+            item.email && item.Journal_Title && item.Journal_Body // Ensure necessary fields are not empty
+        );
+
+      console.log("Filtered Journals:", obj); // Debug the filtered data
+      setFormData(obj); // Replace formData with the filtered array
     } catch (error) {
       console.error("Error fetching data:", error);
       setFormData([]); // Set to an empty array in case of an error
@@ -61,6 +67,8 @@ const Journals = () => {
   useEffect(() => {
     fetchApi();
   }, []);
+
+  console.log("formData:", JSON.stringify(formData, null, 2));
 
   return (
     <>
@@ -83,24 +91,40 @@ const Journals = () => {
           
           {/* Cards Container */}
           {/* If statement for when journals arent created and when they are created  */}
-          {formData.length === 0 || formData.every(data => !data.Journal_Body) ? (
-            <Typography sx={{ fontFamily:" 'Raleway', 'Open Sans', Arial, sans-serif", width: "70%", fontSize: "40px", marginTop: "70px", height: "90px",  color: "white", display: "flex", justifySelf: "center", justifyContent: "center", alignItems:"center", borderRadius: "20px", background: "linear-gradient(to right, rgba(33, 33, 33, 0.4),  rgba(0, 0, 0, 0.7))" }}>
+          {formData.length === 0 || formData.every((data) => !data.Journal_Title && !data.Journal_Body) ? (
+            <Typography
+              sx={{
+                fontFamily: "'Raleway', 'Open Sans', Arial, sans-serif",
+                width: "70%",
+                fontSize: "40px",
+                marginTop: "70px",
+                height: "90px",
+                color: "white",
+                display: "flex",
+                justifySelf: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "20px",
+                background: "linear-gradient(to right, rgba(33, 33, 33, 0.4),  rgba(0, 0, 0, 0.7))",
+              }}
+            >
               No Journals created
             </Typography>
           ) : (
             <Grid container spacing={3} justifyContent="center">
-              {formData.map((data, index) => (
-                <Journalcard
-                
-                  key={index}
-                  title={data.Journal_Title}
-                  body={data.Journal_Body}
-                  travelPic={data.Travel_Pic}
-                  country={data.Country}
-                  city={data.City}
-                  district={data.District}
-                />
-              ))}
+              {formData
+                .filter((data) => data.Journal_Title && data.Journal_Body) // Filter out invalid entries
+                .map((data, index) => (
+                  <Journalcard
+                    key={index}
+                    title={data.Journal_Title}
+                    body={data.Journal_Body}
+                    travelPic={data.Travel_Pic || null}
+                    country={data.Country}
+                    city={data.City}
+                    district={data.District}
+                  />
+                ))}
             </Grid>
           )}
           <Button 

@@ -41,7 +41,7 @@ const Editdiary = () => {
                 latitude: response.data.location.latitude,
                 longitude: response.data.location.longitude,
                 city: response.data.location.city,
-                country: response.data.location.country,
+                country: response.data.location.country_name,
                 district: response.data.location.district,
             }));
             setMarkers({lat: response.data.location.latitude, lng: response.data.location.longitude})
