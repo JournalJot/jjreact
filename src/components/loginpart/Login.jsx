@@ -24,7 +24,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Handle login logic here
+     const response = await axios.post('https://journaljot-api.onrender.com/api/login', formData,
+        {
+          headers: {"Content-Type": "application/json",}
+        }
+      );
+      console.log(response.data);
+      if (response.data.error_code == 200) {
+        localStorage.setItem('email', formData.email);
+        navigate('/Home');
+      }
+      else { {
+        console.log(response.data);
+      }
+      }
+
 
     
     console.log('Login form submitted:', formData);

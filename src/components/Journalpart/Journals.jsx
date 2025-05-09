@@ -19,6 +19,7 @@ const Journals = () => {
       City: "",
       District: "",
       Latitude: "",
+      longitude: ""
     },
   ]);
 
@@ -27,9 +28,34 @@ const Journals = () => {
   };
 
   const fetchApi = async () => {
-    const response = await axios.get("https://journaljot-api.onrender.com/api/journals");
-    setFormData(response.data);
-    console.log(response.data);
+    try {
+      console.log(localStorage.getItem("email"))
+      const response = await axios.get("https://journaljot-api.onrender.com/api/journal?email=" + localStorage.getItem("email"));
+      console.log(response.data.journals[0][1]);
+      
+      setFormData((prevState) => {
+        let obj = response.data.journals.map((data) => {
+          return ({
+            email: data[1],
+            Journal_Title: data[2],
+            Journal_Body: data[3],
+            Travel_Pic: data[4],
+            Country: data[5],
+            City: data[6],
+            District: data[7],
+            Latitude: data[8],
+            longitude: data[9]
+            
+          });
+          
+        });
+        return [prevState, obj];
+      }); // Default to an empty array if no journals are returned
+     
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setFormData([]); // Set to an empty array in case of an error
+    }
   };
 
   useEffect(() => {
@@ -57,7 +83,7 @@ const Journals = () => {
           
           {/* Cards Container */}
           {/* If statement for when journals arent created and when they are created  */}
-          {formData.length === 0 || formData.every(data => data.Journal_Body === "") ? (
+          {formData.length === 0 || formData.every(data => !data.Journal_Body) ? (
             <Typography sx={{ fontFamily:" 'Raleway', 'Open Sans', Arial, sans-serif", width: "70%", fontSize: "40px", marginTop: "70px", height: "90px",  color: "white", display: "flex", justifySelf: "center", justifyContent: "center", alignItems:"center", borderRadius: "20px", background: "linear-gradient(to right, rgba(33, 33, 33, 0.4),  rgba(0, 0, 0, 0.7))" }}>
               No Journals created
             </Typography>

@@ -21,7 +21,7 @@ const Editdiary = () => {
 
 
     const[journals, setJournals] = useState({
-        email: "john@gmail.com",
+        email: "",
         journal_title: "",
         journal_body: "",
         city: "",
@@ -88,6 +88,7 @@ const handleChange = (e) => {
     const { name, value } = e.target; // Extract name and value from the event
     setJournals((prevState) => ({
       ...prevState,
+      email: localStorage.getItem("email"),
       [name]: value, // Dynamically update the field
     }));
   };
@@ -106,7 +107,7 @@ const handleChange = (e) => {
             }
         );
         console.log("Response:", response.data);
-        console.log("Journal Created Successfully:", response.data.message);
+        console.log("Journal Created Successfully:", response.data);
         navigate("/Journalspage");
     
     }catch{
