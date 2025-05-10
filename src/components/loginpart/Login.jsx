@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Container, Typography,Box, Button, Input } from '@mui/material';
 import loginbg from "../Images/beautiful-wooden-pathway-going-breathtaking-colorful-trees-forest_181624-5840.jpg.avif"
@@ -12,6 +12,8 @@ const Login = () => {
     password: ''
   });
 
+  const [email, setEmail] = useState('');
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,10 +22,17 @@ const Login = () => {
       [name]: value
     }));
   };
+  
+  useEffect(() => {
+    // Get the email from localStorage
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail) {
+      setEmail(storedEmail); // Save it into the state
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+    e.preventDefault()    
      const response = await axios.post('https://journaljot-api.onrender.com/api/login', formData,
         {
           headers: {"Content-Type": "application/json",}
@@ -34,9 +43,8 @@ const Login = () => {
         localStorage.setItem('email', formData.email);
         navigate('/Home');
       }
-      else { {
-        console.log(response.data);
-      }
+      else if (response.data.error_code == 404)  {
+        alert("Invalid email or password. Please try again.");
       }
 
 

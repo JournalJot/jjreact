@@ -10,6 +10,7 @@ import Editdiarypage from './Pages/Editdiarypage';
 import ProfilePage from './Pages/ProfilePage';
 import Homecode from './components/Homepart/Homecode';
 import Journalspages from './Pages/Journalspages';
+import NotFound from './Pages/NotFound';
 
 //routers
 const router = createBrowserRouter(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
     <Route path='/Editdiarypage' element={<Editdiarypage /> }/>
     <Route path='/Journalspage' element={<Journalspages /> }/>
     <Route path='/Home' element={<Home /> }/>
+    <Route path="*" element={ <NotFound /> } />
 
   </Route>)
 );
