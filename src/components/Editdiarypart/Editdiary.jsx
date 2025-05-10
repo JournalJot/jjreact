@@ -21,14 +21,14 @@ const Editdiary = () => {
 
 
     const[journals, setJournals] = useState({
-        email: "",
-        journal_title: "",
-        journal_body: "",
-        city: "",
-        country: "",
-        district: "",
-        travel_pic: "",
-        latitude: 48.88,
+    email: "",
+    journal_title: "",
+    journal_body: "",
+    city: "",
+    country: "",
+    district: "",
+    travel_pic: "",
+    latitude: 48.88,
         longitude: 2.355
     })
     const fetchLocation = async () => {
@@ -36,8 +36,8 @@ const Editdiary = () => {
             const response = await axios.get("https://journaljot-api.onrender.com/api/location");
             console.log(response.data);
             
-            setJournals((prevState) => ({
-                ...prevState,
+          setJournals((prevState) => ({
+            ...prevState,
                 latitude: response.data.location.latitude,
                 longitude: response.data.location.longitude,
                 city: response.data.location.city,
@@ -84,7 +84,7 @@ const showMyLocattion = () => {
 
 }
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target; // Extract name and value from the event
     setJournals((prevState) => ({
       ...prevState,
@@ -101,48 +101,48 @@ const handleChange = (e) => {
             "https://journaljot-api.onrender.com/api/journal",
             journals,
             {
-                headers: {
-                    "Content-Type": "application/json",
-                },
+        headers: {
+          "Content-Type": "application/json",
+        },
             }
         );
         console.log("Response:", response.data);
         console.log("Journal Created Successfully:", response.data);
-        navigate("/Journalspage");
+      navigate("/Journalspage");
     
     }catch{
             console.log("post issue")
-        }
-};
+    }
+  };
 
 
       
   return (
     <><section className={classes.container}>
-    <div className={classes.bodycont}>
-        <div className={classes.innerbody}>
+        <div className={classes.bodycont}>
+          <div className={classes.innerbody}>
             <input
             name='journal_title'
             placeholder='TITLE' 
-            value={journals.journal_title} 
-            onChange={handleChange}
+              value={journals.journal_title}
+              onChange={handleChange}
             className={classes.head}></input>
             <div className={classes.diarycont}>
 
                 {/* txtarea */}
-                <div className={classes.txtarea}>
+              <div className={classes.txtarea}>
                     <div><textarea
-                    value={journals.journal_body} 
-                    className={classes.diary} 
-                    onChange={handleChange}
-                    name="journal_body" 
+                  value={journals.journal_body}
+                  className={classes.diary}
+                  onChange={handleChange}
+                  name="journal_body"
                     rows="4" cols="50" 
                     placeholder="Type your message here.."></textarea></div>
-                </div>
+              </div>
 
 
                 {/* map part */}
-                <div className={classes.mapscont}>
+              <div className={classes.mapscont}>
                     <div className={classes.map}>
                         <MapContainer center={markers} zoom={13} ref={mapRef}>
                             <TileLayer attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -151,17 +151,17 @@ const handleChange = (e) => {
                             {/* {location.loaded && !location.error && (
                                 <Marker position={[location.coordinates.lat, location.coordinates.lng]} icon={customIcon}></Marker>
                             )}   this was for geolocation*/}
-                        </MapContainer>
+                  </MapContainer>
                         
                     </div>
 
                     <div className={classes.mapinfo}><h1 className={classes.maphead}>{journals.country},{journals.city},{journals.district}</h1><button onClick={showMyLocattion} className={classes.mapbut}>Find me</button></div>
-                </div>
+              </div>
             </div>
             <button className={classes.mapbut} onClick={handleClick}>Submit</button>
+          </div>
         </div>
-    </div>
-    </section>
+      </section>
 
 
 
