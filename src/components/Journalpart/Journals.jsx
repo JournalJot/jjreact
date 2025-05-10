@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Journalcard from './Journalcard';
 import backg from "../Images/sneha-sivarajan-K8Lh4OenP_E-unsplash.jpg"
+import { Delete } from '@mui/icons-material';
 
 const Journals = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState([
     {
+      rowid: "",
       email: "",
       Journal_Body: "",
       Journal_Title: "",
@@ -41,6 +43,7 @@ const Journals = () => {
 
       const obj = response.data.journals
         .map((data) => ({
+          rowid: data[0],
           email: data[1],
           Journal_Title: data[3],
           Journal_Body: data[2],
@@ -53,7 +56,7 @@ const Journals = () => {
         }))
         .filter(
           (item) =>
-            item.email && item.Journal_Title && item.Journal_Body // Ensure necessary fields are not empty
+            item.email && item.Journal_Title && item.Journal_Body  // Ensure necessary fields are not empty
         );
 
       console.log("Filtered Journals:", obj); // Debug the filtered data
@@ -69,6 +72,42 @@ const Journals = () => {
   }, []);
 
   console.log("formData:", JSON.stringify(formData, null, 2));
+
+
+  const DeleteJournal = async (rowid) => {
+    if (!window.confirm("Are you sure you want to delete this journal?")) {
+      return;
+    }
+
+    try {
+      // Retrieve email from localStorage
+      const email = localStorage.getItem("email");
+      if (!email) {
+        alert("No email found. Please log in again.");
+        return;
+      }
+
+      const response = await axios.post(
+        "https://journaljot-api.onrender.com/api/delete_journal",
+        {
+          rowid: rowid,
+          email: email, // Pass the email to the backend
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log("Delete response:", response.data);
+
+      // Update state directly instead of fetching data again
+      setFormData((prevData) => prevData.filter((data) => data.rowid !== rowid));
+
+      alert("Journal deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+      alert("Failed to delete the journal. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -123,6 +162,14 @@ const Journals = () => {
                     country={data.Country}
                     city={data.City}
                     district={data.District}
+                    onDelete={() => {
+                      const updatedData = formData.filter((_, i) => i !== index);
+                      setFormData(updatedData);
+                      DeleteJournal(data.rowid); // Call the delete function with the rowid
+                    }}
+                    onEdit={() => {
+                      navigate("/Editdiarypage", { state: { data } }); // Pass the data to the edit page
+                    }}
                   />
                 ))}
             </Grid>
