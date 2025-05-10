@@ -14,6 +14,7 @@ const Navbar = () => {
         boxShadow: 'none',
         padding: '0 20px',
         height: '75px',
+        fontFamily: "'Raleway', 'Open Sans', sans-serif"
       }}
     >
       <Toolbar
@@ -136,7 +137,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            href="/ProfilePage"
+            href="/Loginpage"
             underline="none"
             sx={{
               fontSize: '20px',
@@ -147,7 +148,7 @@ const Navbar = () => {
                 transition: '0.3s ease-in-out',
               },
             }}
-            title="Profile"
+            title="LOG IN"
           >
             <img src={prof} style={{width: "70px"}} />
           </Link>

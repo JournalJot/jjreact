@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../Images/New Logo svg.svg'
 import Logow from '../Images/Logosignup.png'
 import Img1 from '../Images/WRITE YOUR TRAVELS.png'
@@ -14,6 +14,14 @@ import Img0 from '../Images/photo-1691322682852-6f3b5421d2fa.avif'
 import { Box,Link, Typography, List, Grid } from '@mui/material'
 
 const Homecode = () => {
+      const [email, setEmail] = useState('');
+      useEffect(() => {
+              const storedEmail = localStorage.getItem('email');
+          if (storedEmail) {
+            setEmail(storedEmail); // Save it into the state
+            
+          }}, [])
+
   return (
     <>
     <Box
