@@ -14,6 +14,7 @@ const Navbar = () => {
         boxShadow: 'none',
         padding: '0 20px',
         height: '75px',
+        fontFamily: "'Raleway', 'Open Sans', sans-serif"
       }}
     >
       <Toolbar
