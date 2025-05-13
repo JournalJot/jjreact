@@ -45,7 +45,7 @@ const Reviews = () => {
           key={index}
           className="Cmtblk"
           sx={{
-            backgroundColor: "#0069ff",
+            backgroundColor: "#4A2102",
             color: "white",
             height: "auto",
             width: "300px",
