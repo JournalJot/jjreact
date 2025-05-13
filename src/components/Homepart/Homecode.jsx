@@ -60,7 +60,7 @@ const Homecode = () => {
       {/* Sections */}
       <Box>
         {/* Name Section */}
-       <Box sx={{width: "95%", paddingLeft: "20px"}}>
+       <Box sx={{width: "95%", paddingLeft: "20px" }}>
   {/* Name Section */}
   <Typography
     className="name"
@@ -68,8 +68,7 @@ const Homecode = () => {
     sx={{
       textAlign: 'center',
       paddingTop: '60px',
-
-      letterSpacing: '45px',
+      letterSpacing: {xs: '10px' ,sm: '30px', md: '45px'},
       fontFamily: '"Dancing Script"',
       fontSize: { xs: '20px', sm: '24px' },
     }}
@@ -237,8 +236,7 @@ const Homecode = () => {
   sx={{
     display: 'flex',
     flexDirection: { xs: 'column', md: 'row' },
-    margin: '40px 10px',
-    marginLeft: "30px",
+    margin: '0px 10px',
     alignItems: 'stretch',
     backgroundColor: '#4A2102',
     borderRadius: '2rem',
