@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography, Button, CardActions, Box, Ico
 import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit'; // Import Edit Icon
 
-const Journalcard = ({ title, body, travelPic, country, city, district, onDelete, onEdit }) => {
+const Journalcard = ({ title, body, travelPic, country, city, district, onDelete, onEdit, onReadMore }) => {
   return (
     <Card
       sx={{
@@ -59,7 +59,7 @@ const Journalcard = ({ title, body, travelPic, country, city, district, onDelete
         </Box>
       </CardContent>
       <CardActions sx={{ marginTop: 'auto', padding: '16px' }}>
-        <Button size="small" variant="contained" color="primary">
+        <Button size="small" variant="contained" color="primary" onClick={onReadMore}>
           Read More
         </Button>
       </CardActions>

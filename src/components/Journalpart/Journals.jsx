@@ -1,29 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Box, AppBar, Toolbar, Button, Container, Grid, Typography, IconButton, Card, CardContent, CardMedia } from '@mui/material';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import { Box, AppBar, Toolbar, Button, Container, Grid, Typography, IconButton, Card, CardContent, CardMedia, TextField, Modal } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Journalcard from './Journalcard';
-import backg from "../Images/sneha-sivarajan-K8Lh4OenP_E-unsplash.jpg"
-import { Delete } from '@mui/icons-material';
+import backg from "../Images/sneha-sivarajan-K8Lh4OenP_E-unsplash.jpg";
 
 const Journals = () => {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState([
-    {
-      rowid: "",
-      email: "",
-      Journal_Body: "",
-      Journal_Title: "",
-      Travel_Pic: "",
-      Country: "",
-      City: "",
-      District: "",
-      Latitude: "",
-      longitude: ""
-    },
-  ]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [formData, setFormData] = useState([]);
+  const [selectedJournal, setSelectedJournal] = useState(null); // State for selected journal
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   const onClick = () => {
     navigate("/Editdiarypage");
@@ -41,29 +28,23 @@ const Journals = () => {
         "https://journaljot-api.onrender.com/api/journal?email=" + email
       );
 
-      const obj = response.data.journals
-        .map((data) => ({
-          rowid: data[0],
-          email: data[1],
-          Journal_Title: data[3],
-          Journal_Body: data[2],
-          Travel_Pic: data[4],
-          Country: data[5],
-          City: data[6],
-          District: data[7],
-          Latitude: data[8],
-          longitude: data[9],
-        }))
-        .filter(
-          (item) =>
-            item.email && item.Journal_Title && item.Journal_Body  // Ensure necessary fields are not empty
-        );
+      const obj = response.data.journals.map((data) => ({
+        rowid: data[0],
+        email: data[1],
+        Journal_Title: data[3],
+        Journal_Body: data[2],
+        Travel_Pic: data[4],
+        Country: data[5],
+        City: data[6],
+        District: data[7],
+        Latitude: data[8],
+        longitude: data[9],
+      }));
 
-      console.log("Filtered Journals:", obj); // Debug the filtered data
-      setFormData(obj); // Replace formData with the filtered array
+      setFormData(obj);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setFormData([]); // Set to an empty array in case of an error
+      setFormData([]);
     }
   };
 
@@ -71,66 +52,66 @@ const Journals = () => {
     fetchApi();
   }, []);
 
-  console.log("formData:", JSON.stringify(formData, null, 2));
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
+  const filteredData = formData.filter(
+    (data) =>
+      data.Journal_Title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.Journal_Body.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const DeleteJournal = async (rowid) => {
-    if (!window.confirm("Are you sure you want to delete this journal?")) {
-      return;
-    }
+  const openModal = (journal) => {
+    console.log("Opening modal for:", journal);
+    setSelectedJournal(journal);
+    setIsModalOpen(true);
+  };
 
-    try {
-      // Retrieve email from localStorage
-      const email = localStorage.getItem("email");
-      if (!email) {
-        alert("No email found. Please log in again.");
-        return;
-      }
-
-      const response = await axios.post(
-        "https://journaljot-api.onrender.com/api/delete_journal",
-        {
-          rowid: rowid,
-          email: email, // Pass the email to the backend
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      console.log("Delete response:", response.data);
-
-      // Update state directly instead of fetching data again
-      setFormData((prevData) => prevData.filter((data) => data.rowid !== rowid));
-
-      alert("Journal deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting journal:", error);
-      alert("Failed to delete the journal. Please try again.");
-    }
+  const closeModal = () => {
+    setSelectedJournal(null);
+    setIsModalOpen(false);
   };
 
   return (
     <>
-      <Box sx={{ minHeight: '100vh', backgroundImage: `url(${backg})`, backgroundSize: 'cover', margin: "0", backgroundAttachment: 'fixed', fontFamily: 'Raleway, Open Sans, Arial, sans-serif' }}>
-
-        {/* Main Section */}
-        <Container sx={{ padding: '20px', paddingTop: "120px", textAlign: 'center' }}>
-          {/* Create Button */}
-          
-
-          {/* Filter Button */}
-          <Box sx={{ marginBottom: '20px' }}>
-            <Button 
-              variant="contained" 
-              startIcon={<FilterListIcon />} 
-              sx={{ backgroundColor: '#444', color: 'white', borderRadius: '5px', fontSize: '1rem', '&:hover': { backgroundColor: '#555' } }}>
-              Filter ▼
-            </Button>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          backgroundImage: `url(${backg})`,
+          backgroundSize: "cover",
+          margin: "0",
+          backgroundAttachment: "fixed",
+          fontFamily: "Raleway, Open Sans, Arial, sans-serif",
+        }}
+      >
+        <Container sx={{ padding: "20px", paddingTop: "120px", textAlign: "center" }}>
+          <Box sx={{ marginBottom: "20px" }}>
+            <TextField
+              variant="outlined"
+              placeholder="Search Journals..."
+              fullWidth
+              value={searchQuery}
+              onChange={handleSearch}
+              sx={{
+                backgroundColor: "white",
+                borderRadius: "5px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#ccc",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#888",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#555",
+                  },
+                },
+              }}
+            />
           </Box>
-          
-          {/* Cards Container */}
-          {/* If statement for when journals arent created and when they are created  */}
-          {formData.length === 0 || formData.every((data) => !data.Journal_Title && !data.Journal_Body) ? (
+
+          {formData.length === 0 ? (
             <Typography
               sx={{
                 fontFamily: "'Raleway', 'Open Sans', Arial, sans-serif",
@@ -151,39 +132,114 @@ const Journals = () => {
             </Typography>
           ) : (
             <Grid container spacing={3} justifyContent="center">
-              {formData
-                .filter((data) => data.Journal_Title && data.Journal_Body) // Filter out invalid entries
-                .map((data, index) => (
-                  <Journalcard
-                    key={index}
-                    title={data.Journal_Title}
-                    body={data.Journal_Body}
-                    travelPic={data.Travel_Pic || null}
-                    country={data.Country}
-                    city={data.City}
-                    district={data.District}
-                    onDelete={() => {
-                      const updatedData = formData.filter((_, i) => i !== index);
-                      setFormData(updatedData);
-                      DeleteJournal(data.rowid); // Call the delete function with the rowid
-                    }}
-                    onEdit={() => {
-                      navigate("/Editdiarypage", { state: { data } }); // Pass the data to the edit page
-                    }}
-                  />
-                ))}
+              {filteredData.map((data, index) => (
+                <Journalcard
+                  key={index}
+                  rowid={data.rowid}
+                  email={data.email}
+                  title={data.Journal_Title}
+                  body={data.Journal_Body}
+                  travelPic={data.Travel_Pic || null}
+                  country={data.Country}
+                  city={data.City}
+                  district={data.District}
+                  onReadMore={() => openModal(data)} // Open modal on "Read More"
+                  onDelete={() => {
+                    (async () => {
+                      try {
+                        await axios.post("https://journaljot-api.onrender.com/api/delete_journal", {
+                          rowid: data.rowid,
+                          email: data.email,
+                        });
+                        console.log("Deleted journal with ID:", data.rowid);
+              
+                        // Update the formData state to remove the deleted journal
+                        setFormData((prevData) => prevData.filter((item) => item.rowid !== data.rowid));
+                      } catch (error) {
+                        console.error("Error deleting journal:", error);
+                      }
+                    })();
+                  }}
+                  onEdit={() => {
+                    navigate("/Editdiarypage", {state: { data } });
+                    console.log("Edit journal with ID:", data.rowid);
+                  }}
+
+                />
+              ))}
             </Grid>
           )}
-          <Button 
-            variant="contained" 
-            color="primary" 
-            sx={{ fontWeight: 'bold', py: 1, px: 4, borderRadius: 1, marginTop: "10px", '&:hover': { backgroundColor: 'blue' }, transition: '0.3s' }} 
-            onClick={onClick}>
+
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              fontWeight: "bold",
+              py: 1,
+              px: 4,
+              borderRadius: 1,
+              marginTop: "10px",
+              "&:hover": { backgroundColor: "blue" },
+              transition: "0.3s",
+            }}
+            onClick={onClick}
+          >
             Create
           </Button>
-          
         </Container>
       </Box>
+
+      {/* Modal for expanded journal */}
+      <Modal
+        open={isModalOpen}
+        onClose={closeModal}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "white",
+            padding: "20px",
+            borderRadius: "10px",
+            width: "80%",
+            maxHeight: "80%",
+            overflowY: "auto",
+            boxShadow: 24,
+          }}
+        >
+          {selectedJournal && (
+            <>
+              <Typography variant="h4" gutterBottom>
+                {selectedJournal.Journal_Title}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {selectedJournal.Journal_Body}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                Location: {selectedJournal.City}, {selectedJournal.District}, {selectedJournal.Country}
+              </Typography>
+              {selectedJournal.Travel_Pic && (
+                <img
+                  src={selectedJournal.Travel_Pic}
+                  alt="Travel"
+                  style={{ width: "100%", marginTop: "20px", borderRadius: "10px" }}
+                />
+              )}
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={closeModal}
+                sx={{ marginTop: "20px" }}
+              >
+                Close
+              </Button>
+            </>
+          )}
+        </Box>
+      </Modal>
     </>
   );
 };
