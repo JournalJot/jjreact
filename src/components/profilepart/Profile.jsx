@@ -19,7 +19,7 @@ const Profile = () => {
     console.log(message);
     
     const fetchUserData = async () => {
-    if (!email) {
+    if (email) {
       console.error("No email found in localStorage.");
       return;
     }
@@ -45,6 +45,7 @@ const Profile = () => {
 
     useEffect(() => {
         const storedEmail = localStorage.getItem('email');
+        
     if (storedEmail) {
       setEmail(storedEmail); // Save it into the state
     }
@@ -255,7 +256,8 @@ const Profile = () => {
                 <TextField
                   name="username"
                   type="text"
-                  placeholder={formData.username}
+                  placeholder="username"
+                  autoComplete="off"
                   value={formData.username}
                   onChange={handleChange}
                   variant="outlined"
@@ -283,7 +285,8 @@ const Profile = () => {
                 <TextField
                   name="email"
                   type="email"
-                  placeholder={email}
+                  placeholder="email"
+                  autoComplete="off"
                   value={formData.email}
                   onChange={handleChange}
                   variant="outlined"
@@ -325,8 +328,8 @@ const Profile = () => {
                 <TextField
                   name="password"
                   type="password"
-                  placeholder={userData.password}
-                  value={formData.password}
+                  placeholder="password"
+                  value={ formData.password}
                   onChange={handleChange}
                   variant="outlined"
                   fullWidth

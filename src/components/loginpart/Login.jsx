@@ -12,8 +12,6 @@ const Login = () => {
     password: ''
   });
 
-  const [email, setEmail] = useState('');
-
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +21,6 @@ const Login = () => {
     }));
   };
   
-  useEffect(() => {
-    // Get the email from localStorage
-    const storedEmail = localStorage.getItem('email');
-    if (storedEmail) {
-      setEmail(storedEmail); // Save it into the state
-    }
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()    
@@ -262,6 +253,26 @@ const Login = () => {
                   }}
                 >
                   Sign up
+                </Link>
+              </Typography>
+              <Typography
+                component="p"
+                sx={{
+                  paddingTop: '10px',
+                  textAlign: 'center',
+                  fontSize: '1rem',
+                  marginTop: '10px',
+                }}
+              >
+                <Link
+                  to="/ForgotPasswordPage"
+                  style={{
+                    color: '#6A2B00',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  Forgot Password?
                 </Link>
               </Typography>
             </Box>

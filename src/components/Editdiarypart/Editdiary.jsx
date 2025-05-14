@@ -146,133 +146,134 @@ const Editdiary = () => {
 
   return (
     <section style={{ padding: "20px", margin: "100px" }}>
-      <div style={{ marginBottom: "20px" }}>
-
-      <Button
-        startIcon={<ArrowBackIcon />}
-        onClick={() => navigate("/Journalspage")}
-        style={{ marginBottom: "20px" }}
-      >
-        Back
-      </Button>
-        <TextField
-          name="journal_title"
-          label="Title"
-          variant="outlined"
-          fullWidth
-          value={mode === "edit" && initialState ? initialState.journal_title : journals.journal_title}
-          onChange={handleChange}
-          style={{ marginBottom: "20px" }}
-        />
-        <TextField
-          name="journal_body"
-          label="Body"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={4}
-          value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
-          onChange={handleChange}
-          style={{ marginBottom: "20px" }}
-        />
-        <FormControl fullWidth style={{ marginBottom: "20px" }}>
-          <InputLabel>Country</InputLabel>
-          <Select
-            name="country"
-            value={journals.country}
-            onChange={(e) => {
-              handleChange(e);
-              setJournals((prevState) => ({
-                ...prevState,
-                district: "", // Reset state and city when country changes
-                city: "",
-              }));
-            }}
+      <div>
+        <div style={{ marginBottom: "20px" }}>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            onClick={() => navigate("/Journalspage")}
+            style={{ marginBottom: "20px" }}
           >
-            {countries.map((country) => (
-              <MenuItem key={country.isoCode} value={country.isoCode}>
-                {country.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginBottom: "20px" }}>
-          <InputLabel>State</InputLabel>
-          <Select
-            name="district"
-            value={journals.district}
-            onChange={(e) => {
-              handleChange(e);
-              setJournals((prevState) => ({
-                ...prevState,
-                city: "", // Reset city when state changes
-              }));
-            }}
-          >
-            {states.map((state) => (
-              <MenuItem key={state.isoCode} value={state.isoCode}>
-                {state.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth style={{ marginBottom: "20px" }}>
-          <InputLabel>City</InputLabel>
-          <Select
-            name="city"
-            value={journals.city}
+            Back
+          </Button>
+          <TextField
+            name="journal_title"
+            label="Title"
+            variant="outlined"
+            fullWidth
+            value={mode === "edit" && initialState ? initialState.journal_title : journals.journal_title}
             onChange={handleChange}
+            style={{ marginBottom: "20px" }}
+          />
+          <TextField
+            name="journal_body"
+            label="Body"
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+            value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
+            onChange={handleChange}
+            style={{ marginBottom: "20px" }}
+          />
+          <FormControl fullWidth style={{ marginBottom: "20px" }}>
+            <InputLabel>Country</InputLabel>
+            <Select
+              name="country"
+              value={journals.country}
+              onChange={(e) => {
+                handleChange(e);
+                setJournals((prevState) => ({
+                  ...prevState,
+                  district: "", // Reset state and city when country changes
+                  city: "",
+                }));
+              }}
+            >
+              {countries.map((country) => (
+                <MenuItem key={country.isoCode} value={country.isoCode}>
+                  {country.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth style={{ marginBottom: "20px" }}>
+            <InputLabel>State</InputLabel>
+            <Select
+              name="district"
+              value={journals.district}
+              onChange={(e) => {
+                handleChange(e);
+                setJournals((prevState) => ({
+                  ...prevState,
+                  city: "", // Reset city when state changes
+                }));
+              }}
+            >
+              {states.map((state) => (
+                <MenuItem key={state.isoCode} value={state.isoCode}>
+                  {state.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth style={{ marginBottom: "20px" }}>
+            <InputLabel>City</InputLabel>
+            <Select
+              name="city"
+              value={journals.city}
+              onChange={handleChange}
+            >
+              {cities.map((city) => (
+                <MenuItem key={city.name} value={city.name}>
+                  {city.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleClick}
+            style={{ marginRight: "10px" }}
           >
-            {cities.map((city) => (
-              <MenuItem key={city.name} value={city.name}>
-                {city.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleClick}
-          style={{ marginRight: "10px" }}
-        >
-          Submit
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => mapRef.current.setView([journals.latitude, journals.longitude], 13)}
-        >
-          Find me
-        </Button>
-      </div>
-      <div style={{ height: "400px", marginTop: "20px" }}>
-        {(mode === "edit" && initialState.latitude && initialState.longitude) ||
-        (journals.latitude && journals.longitude) ? (
-          <MapContainer
-            center={[
-              mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
-              mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
-            ]}
-            zoom={13}
-            ref={mapRef}
-            style={{ height: "100%", width: "100%" }}
+            Submit
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => mapRef.current.setView([journals.latitude, journals.longitude], 13)}
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"
-            />
-            <Marker
-              position={[
+            Find me
+          </Button>
+        </div>
+        <div style={{ height: "400px", marginTop: "20px" }}>
+          {(mode === "edit" && initialState.latitude && initialState.longitude) ||
+          (journals.latitude && journals.longitude) ? (
+            <MapContainer
+              center={[
                 mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
                 mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
               ]}
-              icon={customIcon}
-            />
-          </MapContainer>
-        ) : (
-          <p>Loading map...</p>
-        )}
+              zoom={13}
+              ref={mapRef}
+              style={{ height: "100%", width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"
+              />
+              <Marker
+                position={[
+                  mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
+                  mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
+                ]}
+                icon={customIcon}
+              />
+            </MapContainer>
+          ) : (
+            <p>Loading map...</p>
+          )}
+        </div>
       </div>
     </section>
   );
