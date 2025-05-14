@@ -5,7 +5,7 @@ import cusicon from "./image.png";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the back arrow icon
 import { Country, State, City } from 'country-state-city'; // Import from the package
 
@@ -145,16 +145,30 @@ const Editdiary = () => {
   };
 
   return (
-    <section style={{ padding: "20px", margin: "100px" }}>
+    <Box sx={{backgroundColor: "gray", margin: "0", height: "910px"}}>
+    <section style={{ padding: "20px", margin: "100px", marginTop: "0px", paddingTop: "70px", backgroundColor: "white", borderRadius: "50px"}}>
       <div style={{ marginBottom: "20px" }}>
 
       <Button
         startIcon={<ArrowBackIcon />}
         onClick={() => navigate("/Journalspage")}
-        style={{ marginBottom: "20px" }}
+        style={{ marginBottom: "20px", color: "#4A2102"}}
       >
         Back
       </Button>
+      <Box sx={{display: "flex", justifyContent: "space-between"}}>{/*textfields container */}
+        <Box sx={{width: "55%"}}>
+      <TextField
+          name="journal_body"
+          label="Start Typing"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={11}
+          value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
+          onChange={handleChange}
+        /></Box>
+        <Box sx={{width: "40%"}}> 
         <TextField
           name="journal_title"
           label="Title"
@@ -162,18 +176,7 @@ const Editdiary = () => {
           fullWidth
           value={mode === "edit" && initialState ? initialState.journal_title : journals.journal_title}
           onChange={handleChange}
-          style={{ marginBottom: "20px" }}
-        />
-        <TextField
-          name="journal_body"
-          label="Body"
-          variant="outlined"
-          fullWidth
-          multiline
-          rows={4}
-          value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
-          onChange={handleChange}
-          style={{ marginBottom: "20px" }}
+          sx={{ marginBottom: "20px" }}
         />
         <FormControl fullWidth style={{ marginBottom: "20px" }}>
           <InputLabel>Country</InputLabel>
@@ -230,11 +233,13 @@ const Editdiary = () => {
             ))}
           </Select>
         </FormControl>
+        </Box>
+        </Box>
         <Button
           variant="contained"
           color="primary"
           onClick={handleClick}
-          style={{ marginRight: "10px" }}
+          sx={{ marginRight: "10px", backgroundColor: "#4A2102" }}
         >
           Submit
         </Button>
@@ -275,6 +280,7 @@ const Editdiary = () => {
         )}
       </div>
     </section>
+    </Box>
   );
 };
 
