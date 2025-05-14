@@ -5,7 +5,7 @@ import cusicon from "./image.png";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Import the back arrow icon
 import { Country, State, City } from 'country-state-city'; // Import from the package
 
@@ -145,137 +145,142 @@ const Editdiary = () => {
   };
 
   return (
-    <section style={{ padding: "20px", margin: "100px" }}>
-      <div>
-        <div style={{ marginBottom: "20px" }}>
-          <Button
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate("/Journalspage")}
-            style={{ marginBottom: "20px" }}
+    <Box sx={{backgroundColor: "gray", margin: "0", height: "910px"}}>
+    <section style={{ padding: "20px", margin: "100px", marginTop: "0px", paddingTop: "70px", backgroundColor: "white", borderRadius: "50px"}}>
+      <div style={{ marginBottom: "20px" }}>
+
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate("/Journalspage")}
+        style={{ marginBottom: "20px", color: "#4A2102"}}
+      >
+        Back
+      </Button>
+      <Box sx={{display: "flex", justifyContent: "space-between"}}>{/*textfields container */}
+        <Box sx={{width: "55%"}}>
+      <TextField
+          name="journal_body"
+          label="Start Typing"
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={11}
+          value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
+          onChange={handleChange}
+        /></Box>
+        <Box sx={{width: "40%"}}> 
+        <TextField
+          name="journal_title"
+          label="Title"
+          variant="outlined"
+          fullWidth
+          value={mode === "edit" && initialState ? initialState.journal_title : journals.journal_title}
+          onChange={handleChange}
+          sx={{ marginBottom: "20px" }}
+        />
+        <FormControl fullWidth style={{ marginBottom: "20px" }}>
+          <InputLabel>Country</InputLabel>
+          <Select
+            name="country"
+            value={journals.country}
+            onChange={(e) => {
+              handleChange(e);
+              setJournals((prevState) => ({
+                ...prevState,
+                district: "", // Reset state and city when country changes
+                city: "",
+              }));
+            }}
           >
-            Back
-          </Button>
-          <TextField
-            name="journal_title"
-            label="Title"
-            variant="outlined"
-            fullWidth
-            value={mode === "edit" && initialState ? initialState.journal_title : journals.journal_title}
+            {countries.map((country) => (
+              <MenuItem key={country.isoCode} value={country.isoCode}>
+                {country.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth style={{ marginBottom: "20px" }}>
+          <InputLabel>State</InputLabel>
+          <Select
+            name="district"
+            value={journals.district}
+            onChange={(e) => {
+              handleChange(e);
+              setJournals((prevState) => ({
+                ...prevState,
+                city: "", // Reset city when state changes
+              }));
+            }}
+          >
+            {states.map((state) => (
+              <MenuItem key={state.isoCode} value={state.isoCode}>
+                {state.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth style={{ marginBottom: "20px" }}>
+          <InputLabel>City</InputLabel>
+          <Select
+            name="city"
+            value={journals.city}
             onChange={handleChange}
-            style={{ marginBottom: "20px" }}
-          />
-          <TextField
-            name="journal_body"
-            label="Body"
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={4}
-            value={mode === "edit" && initialState ? initialState.journal_body : journals.journal_body}
-            onChange={handleChange}
-            style={{ marginBottom: "20px" }}
-          />
-          <FormControl fullWidth style={{ marginBottom: "20px" }}>
-            <InputLabel>Country</InputLabel>
-            <Select
-              name="country"
-              value={journals.country}
-              onChange={(e) => {
-                handleChange(e);
-                setJournals((prevState) => ({
-                  ...prevState,
-                  district: "", // Reset state and city when country changes
-                  city: "",
-                }));
-              }}
-            >
-              {countries.map((country) => (
-                <MenuItem key={country.isoCode} value={country.isoCode}>
-                  {country.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth style={{ marginBottom: "20px" }}>
-            <InputLabel>State</InputLabel>
-            <Select
-              name="district"
-              value={journals.district}
-              onChange={(e) => {
-                handleChange(e);
-                setJournals((prevState) => ({
-                  ...prevState,
-                  city: "", // Reset city when state changes
-                }));
-              }}
-            >
-              {states.map((state) => (
-                <MenuItem key={state.isoCode} value={state.isoCode}>
-                  {state.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth style={{ marginBottom: "20px" }}>
-            <InputLabel>City</InputLabel>
-            <Select
-              name="city"
-              value={journals.city}
-              onChange={handleChange}
-            >
-              {cities.map((city) => (
-                <MenuItem key={city.name} value={city.name}>
-                  {city.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleClick}
-            style={{ marginRight: "10px" }}
           >
-            Submit
-          </Button>
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => mapRef.current.setView([journals.latitude, journals.longitude], 13)}
+            {cities.map((city) => (
+              <MenuItem key={city.name} value={city.name}>
+                {city.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        </Box>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+          sx={{ marginRight: "10px", backgroundColor: "#4A2102" }}
+        >
+          Submit
+        </Button>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => mapRef.current.setView([journals.latitude, journals.longitude], 13)}
+        >
+          Find me
+        </Button>
+      </div>
+      <div style={{ height: "400px", marginTop: "20px" }}>
+        {(mode === "edit" && initialState.latitude && initialState.longitude) ||
+        (journals.latitude && journals.longitude) ? (
+          <MapContainer
+            center={[
+              mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
+              mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
+            ]}
+            zoom={13}
+            ref={mapRef}
+            style={{ height: "100%", width: "100%" }}
           >
-            Find me
-          </Button>
-        </div>
-        <div style={{ height: "400px", marginTop: "20px" }}>
-          {(mode === "edit" && initialState.latitude && initialState.longitude) ||
-          (journals.latitude && journals.longitude) ? (
-            <MapContainer
-              center={[
+            <TileLayer
+              attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"
+            />
+            <Marker
+              position={[
                 mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
                 mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
               ]}
-              zoom={13}
-              ref={mapRef}
-              style={{ height: "100%", width: "100%" }}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=fXmTwJM642uPLZiwzhA1"
-              />
-              <Marker
-                position={[
-                  mode === "edit" && initialState.latitude ? initialState.latitude : journals.latitude,
-                  mode === "edit" && initialState.longitude ? initialState.longitude : journals.longitude,
-                ]}
-                icon={customIcon}
-              />
-            </MapContainer>
-          ) : (
-            <p>Loading map...</p>
-          )}
-        </div>
+              icon={customIcon}
+            />
+          </MapContainer>
+        ) : (
+          <p>Loading map...</p>
+        )}
       </div>
     </section>
+    </Box>
   );
 };
 

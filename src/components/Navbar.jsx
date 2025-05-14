@@ -10,6 +10,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isMobile = useMediaQuery('(max-width:600px)');
+  const [hovered, setHovered] = useState(false);
+
+
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -91,20 +94,50 @@ const Navbar = () => {
                   </ListItem>
 
                 ))}
-                <ListItem button component="a" href="/loginPage" sx={{width: "100%", padding: "0px 0px", height: "40%",}}>
-                  <ListItemText
-                    primary="Log Out"
-                    sx={{
-                      textTransform: 'uppercase',
-                        height: "100%",
-                        fontWeight: 'bold',
-                        padding: "0px",
-                        color: '#6A2B00',
-                        textAlign: "center",
-                      '&:hover': {transition: '0.3s ease-in-out' },
-                    }}
-                  />
-                </ListItem>
+                <ListItem
+        sx={{
+          width: "100%",
+          padding: "0px",
+          height: "40%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative", // Necessary for positioning the button
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <ListItemText
+          primary="Log Out"
+          sx={{
+            textTransform: "uppercase",
+            fontWeight: "bold",
+            padding: "0px",
+            color: "#6A2B00",
+            textAlign: "center",
+            fontSize: "16px",
+          }}
+        />
+        {hovered && (
+          <Button
+            variant="contained"
+            color="error"
+            href="/loginPage"
+            sx={{
+              position: "absolute",
+              top: "50%", // Place the button in the center
+              left: "50%",
+              transform: "translate(-50%, -50%)", // Center align the button
+              zIndex: 1,
+              fontSize: "14px",
+              padding: "5px 10px",
+            }}
+          >
+            Log Out
+          </Button>
+        )}
+      </ListItem>
+                
               </List>
             </Drawer>
           </>

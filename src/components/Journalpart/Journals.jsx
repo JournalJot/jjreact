@@ -179,9 +179,10 @@ const Journals = () => {
               fontWeight: "bold",
               py: 1,
               px: 4,
+              backgroundColor: "#4A2102",
               borderRadius: 1,
               marginTop: "10px",
-              "&:hover": { backgroundColor: "blue" },
+              "&:hover": { backgroundColor: "#4A2122", },
               transition: "0.3s",
             }}
             onClick={onClick}
