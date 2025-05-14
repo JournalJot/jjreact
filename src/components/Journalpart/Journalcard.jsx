@@ -1,24 +1,35 @@
 import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button, CardActions, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import EditIcon from '@mui/icons-material/Edit'; // Import Edit Icon
+import EditIcon from '@mui/icons-material/Edit';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-const Journalcard = ({ title, body, travelPic, country, city, district, onDelete, onEdit, onReadMore }) => {
+const Journalcard = ({ 
+  title, 
+  body, 
+  travelPic, 
+  country, 
+  city, 
+  district, 
+  onDelete, 
+  onEdit, 
+  onReadMore, 
+  onImageUpload 
+}) => {
   return (
     <Card
       sx={{
         maxWidth: 345,
-        minWidth: 300, // Minimum width to fit 3 cards in a row
-        minHeight: 400, // Minimum height for consistent card size
+        minWidth: 300,
+        minHeight: 400,
         margin: '20px',
         boxShadow: 3,
         position: 'relative',
-        flex: '1 1 calc(33.33% - 40px)', // Flex property for 3 cards per row
+        flex: '1 1 calc(33.33% - 40px)',
         display: 'flex',
-        flexDirection: 'column', // Ensure content stacks vertically
+        flexDirection: 'column',
       }}
     >
-      {/* Image Container with Fixed Height */}
       <Box sx={{ height: 140, backgroundColor: '#f0f0f0' }}>
         {travelPic && (
           <CardMedia
@@ -29,7 +40,6 @@ const Journalcard = ({ title, body, travelPic, country, city, district, onDelete
           />
         )}
       </Box>
-      {/* Delete Button */}
       <IconButton
         aria-label="delete"
         sx={{ position: 'absolute', top: 8, right: 8 }}
@@ -37,20 +47,32 @@ const Journalcard = ({ title, body, travelPic, country, city, district, onDelete
       >
         <CloseIcon />
       </IconButton>
-      {/* Edit Button */}
       <IconButton
         aria-label="edit"
-        sx={{ position: 'absolute', top: 8, right: 48 }} // Position it next to the delete button
+        sx={{ position: 'absolute', top: 8, right: 48 }}
         onClick={onEdit}
       >
         <EditIcon />
+      </IconButton>
+      <IconButton
+        aria-label="camera"
+        sx={{ position: 'absolute', top: 8, right: 88 }}
+        component="label"
+      >
+        <CameraAltIcon />
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={onImageUpload}
+        />
       </IconButton>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {body}
+          {body.substring(0, 25)}...
         </Typography>
         <Box sx={{ marginTop: 2 }}>
           <Typography variant="subtitle2" color="text.secondary">
@@ -59,7 +81,7 @@ const Journalcard = ({ title, body, travelPic, country, city, district, onDelete
         </Box>
       </CardContent>
       <CardActions sx={{ marginTop: 'auto', padding: '16px' }}>
-        <Button size="small" variant="contained" color="primary" onClick={onReadMore}>
+        <Button size="small" variant="contained" color="primary" onClick={onReadMore} sx={{ backgroundColor: "#4A2122" }}>
           Read More
         </Button>
       </CardActions>
