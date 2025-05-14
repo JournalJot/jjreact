@@ -16,6 +16,23 @@ const PasswordResetPage = () => {
             alert('Passwords do not match!');
             return;
         }
+        if (newPassword.length < 8) {
+            alert('Password must be at least 8 characters long!');
+            return;
+        }
+        // Simulate a password reset API call
+        axios.post('https://journaljot-api.onrender.com/api/change_password', ({ email, new_password: newPassword }))
+            .then(response => {
+                if (response.data.error_code === 200) {
+                    alert('Password reset successfully!');
+                } else {
+                    alert('Failed to reset password. Please try again.');
+                }
+            }
+        ).catch(error => {
+            console.error('Error resetting password:', error);
+            alert('An error occurred. Please try again later.');
+        });
         alert(`Password reset submitted for ${email}!`);
     };
 
