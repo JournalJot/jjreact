@@ -92,7 +92,7 @@ const Profile = () => {
 
         try {
             const response = await axios.post(
-                `https://journaljot-api.onrender.com/upload_profile_pic?email=${email}`,
+                `https://journaljot-api.onrender.com/api/profile_pic?email=${email}`,
                 formData,
                 {
                     headers: {
