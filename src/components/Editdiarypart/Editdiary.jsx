@@ -138,6 +138,7 @@ const Editdiary = () => {
         : await axios.post("https://journaljot-api.onrender.com/api/journal", journals, {
             headers: { "Content-Type": "application/json" },
           });
+          console.log(response);
       navigate("/Journalspage");
     } catch (error) {
       console.error("Error submitting journal:", error);

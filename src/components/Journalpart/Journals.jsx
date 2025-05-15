@@ -22,16 +22,16 @@ const Journals = () => {
 
       const response = await axios.get(`https://journaljot-api.onrender.com/api/journal?email=${email}`);
       const obj = response.data.journals.map((data) => ({
-        rowid: data[0],
-        email: data[1],
-        Journal_Title: data[3],
-        Journal_Body: data[2],
-        Travel_Pic: data[4],
-        Country: data[5],
-        City: data[6],
-        District: data[7],
-        Latitude: data[8],
-        longitude: data[9],
+        rowid: data.rowid,
+        email: data.email,
+        Journal_Title: data.journal_title,
+        Journal_Body: data.journal_body,
+        Travel_Pic: data.travel_pic,
+        Country: data.country,
+        City: data.city,
+        District: data.district,
+        Latitude: data.latitude,
+        longitude: data.longitude,
       }));
 
       setFormData(obj);
@@ -161,8 +161,26 @@ const Journals = () => {
                   country={data.Country}
                   city={data.City}
                   district={data.District}
-                  onDelete={() => console.log("Delete")}
-                  onEdit={() => console.log("Edit")}
+                  onDelete={() => {
+                    (async () => {
+                      try {
+                        await axios.post("https://journaljot-api.onrender.com/api/delete_journal", {
+                          rowid: data.rowid,
+                          email: data.email,
+                        });
+                        console.log("Deleted journal with ID:", data.rowid);
+              
+                        // Update the formData state to remove the deleted journal
+                        setFormData((prevData) => prevData.filter((item) => item.rowid !== data.rowid));
+                      } catch (error) {
+                        console.error("Error deleting journal:", error);
+                      }
+                    })();
+                  }}
+                  onEdit={() => {
+                    navigate("/Editdiarypage", {state: { data } });
+                    console.log("Edit journal with ID:", data.rowid);
+                  }}
                   onReadMore={() => openModal(data)}
                   onImageUpload={(e) => handleImageUpload(e, data)}
                 />
