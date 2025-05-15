@@ -12,7 +12,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("")
   const [formData, setFormData] = useState({
-          username: "",
+          name: "",
           email: "",
           password: ""
       });
@@ -169,10 +169,10 @@ const Signup = () => {
                 style={{ marginBottom: "20px" }}
               />
               <Input
-                name="username"
+                name="name"
                 type="text"
                 placeholder="Full Name"
-                value={formData.username}
+                value={formData.name}
                 onChange={handleChange}
                 disableUnderline
                 sx={{

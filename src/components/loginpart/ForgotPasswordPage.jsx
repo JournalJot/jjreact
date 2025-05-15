@@ -13,7 +13,7 @@ const ForgotPasswordPage = () => {
         if (email) {
             axios.post('https://journaljot-api.onrender.com/api/forgot_password', { email })
                 .then((response) => {
-                    if (response.data.success) {
+                    if (response.data.error_code === 200) {
                         alert('Verification code sent to your email.');
                     } else {
                         alert('Failed to send verification code. Please try again.');

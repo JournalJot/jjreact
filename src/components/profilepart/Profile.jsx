@@ -14,29 +14,29 @@ const Profile = () => {
         email: '',
         password: ''});
     const [email, setEmail] = useState('');
-    
 
     console.log(message);
     
-    const fetchUserData = async () => {
-    if (email) {
+    const fetchUserData = async (userEmail) => {
+    if (userEmail.length === 0) {
       console.error("No email found in localStorage.");
       return;
     }
 
     try {
-      const response = await axios.get(`https://journaljot-api.onrender.com/api/user?email=${email}`);
+      const response = await axios.get(`https://journaljot-api.onrender.com/api/user?email=${userEmail}`);
       const data = response.data;
-
-      setUserData(data);
+      console.log("User data fetched:", data);
+      
+      setUserData(data.user);
       setFormData({
-        username: data.name || '',
-        email: email || '',
+        username: data.user[1] || '',
+        email: data.user[2] || '',
         password: '' // Do not pre-fill password for security reasons
       });
 
       if (data.profile_pic) {
-        setPreviewUrl(`https://journaljot-api.onrender.com/profile_pic/${email}`);
+        setPreviewUrl(`https://journaljot-api.onrender.com/profile_pic/${userEmail}`);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -44,13 +44,19 @@ const Profile = () => {
   };
 
     useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
-        
+    // Get email from localStorage once on mount
+    const storedEmail = localStorage.getItem('email');
+
+    
     if (storedEmail) {
-      setEmail(storedEmail); // Save it into the state
+        setEmail(storedEmail);
+        console.log(storedEmail);
+        fetchUserData(storedEmail);
+    } else {
+        console.error("No email found in localStorage.");
     }
-    fetchUserData();   
-    }, []);
+}, []); 
+
 
     
 
