@@ -56,6 +56,32 @@ const Journals = () => {
     setSearchQuery(e.target.value);
   };
 
+  const handleImageUpload = async (event, journal) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("rowid", journal.rowid);
+  formData.append("email", journal.email);
+  formData.append("travel_pic", file);
+
+  // Debugging: Log FormData contents
+  for (let pair of formData.entries()) {
+    console.log(`${pair[0]}:`, pair[1]);
+  }
+
+  try {
+    const response = await axios.post(
+      "https://journaljot-api.onrender.com/api/journal_image",
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+    console.log("Image uploaded successfully:", response.data);
+  } catch (error) {
+    console.error("Error uploading image:", error);
+  }
+};
+
   const filteredData = formData.filter(
     (data) =>
       data.Journal_Title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -145,10 +171,7 @@ const Journals = () => {
                   country={data.Country}
                   city={data.City}
                   district={data.District}
-<<<<<<< HEAD
-=======
                   onReadMore={() => openModal(data)} // Open modal on "Read More"
->>>>>>> 6b6a643d2a5e9cdb55cb964f67860b6369965af6
                   onDelete={() => {
                     (async () => {
                       try {
@@ -169,12 +192,7 @@ const Journals = () => {
                     navigate("/Editdiarypage", {state: { data } });
                     console.log("Edit journal with ID:", data.rowid);
                   }}
-<<<<<<< HEAD
-                  onReadMore={() => openModal(data)}
                   onImageUpload={(e) => handleImageUpload(e, data)}
-=======
-
->>>>>>> 6b6a643d2a5e9cdb55cb964f67860b6369965af6
                 />
               ))}
             </Grid>
