@@ -29,16 +29,16 @@ const Journals = () => {
       );
 
       const obj = response.data.journals.map((data) => ({
-        rowid: data[0],
-        email: data[1],
-        Journal_Title: data[3],
-        Journal_Body: data[2],
-        Travel_Pic: data[4],
-        Country: data[5],
-        City: data[6],
-        District: data[7],
-        Latitude: data[8],
-        longitude: data[9],
+        rowid: data.rowid,
+        email: data.email,
+        Journal_Title: data.journal_title,
+        Journal_Body: data.journal_body,
+        Travel_Pic: data.travel_pic,
+        Country: data.country,
+        City: data.city,
+        District: data.district,
+        Latitude: data.latitude,
+        longitude: data.longitude,
       }));
 
       setFormData(obj);
@@ -145,7 +145,10 @@ const Journals = () => {
                   country={data.Country}
                   city={data.City}
                   district={data.District}
+<<<<<<< HEAD
+=======
                   onReadMore={() => openModal(data)} // Open modal on "Read More"
+>>>>>>> 6b6a643d2a5e9cdb55cb964f67860b6369965af6
                   onDelete={() => {
                     (async () => {
                       try {
@@ -166,7 +169,12 @@ const Journals = () => {
                     navigate("/Editdiarypage", {state: { data } });
                     console.log("Edit journal with ID:", data.rowid);
                   }}
+<<<<<<< HEAD
+                  onReadMore={() => openModal(data)}
+                  onImageUpload={(e) => handleImageUpload(e, data)}
+=======
 
+>>>>>>> 6b6a643d2a5e9cdb55cb964f67860b6369965af6
                 />
               ))}
             </Grid>
