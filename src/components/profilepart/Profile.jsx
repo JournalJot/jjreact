@@ -118,11 +118,7 @@ const Profile = () => {
 
         try {
             const response = await axios.post(
-<<<<<<< HEAD
-                `https://journaljot-api.onrender.com/api/profile_pic?email=${email}`,
-=======
-                `https://journaljot-api.onrender.com/api/profile_image`,
->>>>>>> e41cc9f568c5b539254b9b6160ae97f1a63984a4
+                `https://journaljot-api.onrender.com/api/profile_image?email=${email}`,
                 formData,
                 {
                     headers: {
