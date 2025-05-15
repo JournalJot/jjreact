@@ -2,16 +2,17 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { Box, Input, Typography, Button } from '@mui/material'
 import loginbg from "../Images/beautiful-wooden-pathway-going-breathtaking-colorful-trees-forest_181624-5840.jpg.avif"
 import usericon from "../Images/user-octagon-svgrepo-com.png"
 
 const Signup = () => {
 
-
+  const navigate = useNavigate();
   const [message, setMessage] = useState("")
   const [formData, setFormData] = useState({
-          username: "",
+          name: "",
           email: "",
           password: ""
       });
@@ -26,19 +27,19 @@ const Signup = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        //send to backend here
-        try{
-            const response = await axios.post('https://journaljot-api.onrender.com/api/user', formData,
-            {
-              headers: {"Content-Type": "application/json",},
-            }
-          );setMessage(response.data.message);
+        try {
+          const response = await axios.post('https://journaljot-api.onrender.com/api/user', formData, {
+            headers: { "Content-Type": "application/json" },
+          });
+          setMessage(response.data.message);
+      
+          // Navigate to the login page after successful signup
+          navigate("/Loginpage");
         } catch (error) {
-          setMessage(error.response?.data?.message || "Login failed");
+          setMessage(error.response?.data?.message || "Signup failed");
         }
-        // Form submission logic here
         console.log("Form submitted:", formData);
-    };
+      };
 
 
 
@@ -168,10 +169,10 @@ const Signup = () => {
                 style={{ marginBottom: "20px" }}
               />
               <Input
-                name="username"
+                name="name"
                 type="text"
                 placeholder="Full Name"
-                value={formData.username}
+                value={formData.name}
                 onChange={handleChange}
                 disableUnderline
                 sx={{

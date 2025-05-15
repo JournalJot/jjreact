@@ -14,42 +14,53 @@ const Profile = () => {
         email: '',
         password: ''});
     const [email, setEmail] = useState('');
-    
 
     console.log(message);
     
-    const fetchUserData = async () => {
-    if (!email) {
+    const fetchUserData = async (userEmail) => {
+    if (userEmail.length === 0) {
       console.error("No email found in localStorage.");
       return;
     }
 
     try {
-      const response = await axios.get(`https://journaljot-api.onrender.com/api/user?email=${email}`);
+      const response = await axios.get(`https://journaljot-api.onrender.com/api/user?email=${userEmail}`);
       const data = response.data;
+      console.log("User data fetched:", data);
 
-      setUserData(data);
+      setUserData(data.user);
       setFormData({
-        username: data.name || '',
-        email: email || '',
+        username: data.user.name || '',
+        email: data.user.email || '',
         password: '' // Do not pre-fill password for security reasons
+
       });
 
-      if (data.profile_pic) {
-        setPreviewUrl(`https://journaljot-api.onrender.com/profile_pic/${email}`);
+      // Handle profile_pic as data URL or base64 string
+      if (data.user.profile_pic) {
+          setPreviewUrl(data.user.profile_pic);
+      } else {
+        setPreviewUrl('');
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
-  };
+};
 
     useEffect(() => {
-        const storedEmail = localStorage.getItem('email');
+    // Get email from localStorage once on mount
+    const storedEmail = localStorage.getItem('email');
+
+    
     if (storedEmail) {
-      setEmail(storedEmail); // Save it into the state
+        setEmail(storedEmail);
+        console.log(storedEmail);
+        fetchUserData(storedEmail);
+    } else {
+        console.error("No email found in localStorage.");
     }
-    fetchUserData();   
-    }, []);
+}, []); 
+
 
     
 
@@ -66,19 +77,33 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //send to backend here
-        try{
-            const response = await axios.post('https://journaljot-api.onrender.com/api/user', {
-              name: formData.username,
-              email: formData.email,
-              password: formData.password
-            });setMessage(response.data.message);
-        } catch (error) {
-          setMessage(error.response?.data?.message || "Login failed");
+
+        // Create a FormData object for multipart/form-data
+        const multipartForm = new FormData();
+        multipartForm.append('name', formData.username);
+        multipartForm.append('email', formData.email);
+        multipartForm.append('password', formData.password);
+
+        // If a new profile picture is selected, append it
+        if (selectedFile) {
+            multipartForm.append('profile_pic', selectedFile);
         }
-        // Form submission logic here
+
+        try {
+            const response = await axios.post(
+                'https://journaljot-api.onrender.com/api/user',
+                multipartForm,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            setMessage(response.data.message);
+        } catch (error) {
+            setMessage(error.response?.data?.message || "Profile update failed");
+        }
         console.log("Form submitted:", formData);
-        
     };
 
     const handleUpload = async () => {
@@ -88,11 +113,16 @@ const Profile = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', selectedFile);
+        formData.append('email', email); // Use the email from state
+        formData.append('profile_pic', selectedFile);
 
         try {
             const response = await axios.post(
+<<<<<<< HEAD
                 `https://journaljot-api.onrender.com/api/profile_pic?email=${email}`,
+=======
+                `https://journaljot-api.onrender.com/api/profile_image`,
+>>>>>>> e41cc9f568c5b539254b9b6160ae97f1a63984a4
                 formData,
                 {
                     headers: {
@@ -109,6 +139,13 @@ const Profile = () => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
+        // Only allow JPEG images
+        if (file.type !== "image/jpeg" && file.type !== "image/jpg") {
+            setMessage("Only JPEG images are allowed.");
+            setSelectedFile(null);
+            return;
+        }
 
         setSelectedFile(file);
 
@@ -196,7 +233,7 @@ const Profile = () => {
         >
           {/* Profile Image Section */}
           <Box className="profileuserimage" sx={{ display: 'block', textAlign: 'center', width: '200px', borderRadius: "50px" }}>
-            {previewUrl ? (
+            {previewUrl ? ( 
              <Box sx={{borderRadius: "50%"}}> <img src={previewUrl} alt="acc" style={{width: "100px", height: '100px', objectFit: "cover", borderRadius: "50%"}} />
             </Box> ) : (
               <Box sx={{ color: 'white', fontSize: '14px', marginBottom: '10px' }}>No image selected</Box>
@@ -205,7 +242,7 @@ const Profile = () => {
             <Input
               type="file"
               id="profileUpload"
-              accept="image/*"
+              accept="image/jpeg"
               onChange={handleFileChange}
               sx={{
                 display: 'block',
@@ -255,7 +292,8 @@ const Profile = () => {
                 <TextField
                   name="username"
                   type="text"
-                  placeholder={formData.username}
+                  placeholder="username"
+                  autoComplete="off"
                   value={formData.username}
                   onChange={handleChange}
                   variant="outlined"
@@ -283,7 +321,8 @@ const Profile = () => {
                 <TextField
                   name="email"
                   type="email"
-                  placeholder={email}
+                  placeholder="email"
+                  autoComplete="off"
                   value={formData.email}
                   onChange={handleChange}
                   variant="outlined"
@@ -325,8 +364,8 @@ const Profile = () => {
                 <TextField
                   name="password"
                   type="password"
-                  placeholder={userData.password}
-                  value={formData.password}
+                  placeholder="password"
+                  value={ formData.password}
                   onChange={handleChange}
                   variant="outlined"
                   fullWidth

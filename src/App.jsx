@@ -10,6 +10,7 @@ import Editdiarypage from './Pages/Editdiarypage';
 import ProfilePage from './Pages/ProfilePage';
 import Homecode from './components/Homepart/Homecode';
 import Journalspages from './Pages/Journalspages';
+import ForgotPasswordPage from './components/loginpart/ForgotPasswordPage';
 import NotFound from './Pages/NotFound';
 
 //routers
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
     <Route path='/ProfilePage' element={<ProfilePage /> }/>
     <Route path='/Editdiarypage' element={<Editdiarypage />} />
     <Route path='/Journalspage' element={<Journalspages /> }/>
+    <Route path='/ForgotPasswordPage' element={<ForgotPasswordPage /> }/>
     <Route path='/Home' element={<Home /> }/>
     <Route path="*" element={ <NotFound /> } />
 
@@ -47,15 +49,15 @@ Home page:
   5. if possible adjust image to have transparent background and also clickable link to home page throughout all nav bar in site 
   6. Adjust footer links to link to actual page 
 Journal page:
-  1. add filter functionality code
-  2. add delete button to each card ...///
-  3. add edit button to each card 
-  4. enlarge card when view button is clicked 
+  1. add filter functionality code XXX
+  2. add delete button to each card XXX
+  3. add edit button to each card XXX
+  4. enlarge card when view button is clicked  XXX
   5. add more styling to card and background image if need be 
 Edit diary page:
   1. Adjust page styling and background too 
-  2. Add dropdown or input fields for country city and district in case ip api not working or ip api got user location wrong 
-  3. Add an arrow to go back to journal page
+  2. Add dropdown or input fields for country city and district in case ip api not working or ip api got user location wrong  XXX
+  3. Add an arrow to go back to journal page XXX
 Profile page:
   1. Add better styling to the page 
   2. Make Delete Account button functional

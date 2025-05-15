@@ -131,23 +131,25 @@ const Journals = () => {
 
           {formData.length === 0 ? (
             <Typography
-              sx={{
-                fontFamily: "'Raleway', 'Open Sans', Arial, sans-serif",
-                width: "70%",
-                fontSize: "40px",
-                marginTop: "70px",
-                height: "90px",
-                color: "white",
-                display: "flex",
-                justifySelf: "center",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "20px",
-                background: "linear-gradient(to right, rgba(33, 33, 33, 0.4),  rgba(0, 0, 0, 0.7))",
-              }}
-            >
-              No Journals created
-            </Typography>
+        sx={{
+          fontFamily: "'Raleway', 'Open Sans', Arial, sans-serif",
+          width: { xs: "90%", sm: "80%", md: "70%" }, // Adjust width for different screen sizes
+          fontSize: { xs: "20px", sm: "30px", md: "40px" }, // Responsive font size
+          marginTop: { xs: "50px", md: "70px" }, // Adjust margin for different screen sizes
+          height: { xs: "auto", md: "90px" }, // Adjust height for small screens
+          padding: { xs: "10px", md: "0" }, // Add padding for better spacing on small screens
+          color: "white",
+          display: "flex",
+          justifyContent: "center",
+          justifySelf: "center",
+          alignItems: "center",
+          textAlign: "center", // Center-align the text for smaller screens
+          borderRadius: "20px",
+          background: "linear-gradient(to right, rgba(33, 33, 33, 0.4),  rgba(0, 0, 0, 0.7))",
+          }}
+        >
+            No Journals created
+          </Typography>
           ) : (
             <Grid container spacing={3} justifyContent="center">
               {filteredData.map((data, index) => (
