@@ -27,21 +27,25 @@ const Profile = () => {
       const response = await axios.get(`https://journaljot-api.onrender.com/api/user?email=${userEmail}`);
       const data = response.data;
       console.log("User data fetched:", data);
-      
+
       setUserData(data.user);
       setFormData({
-        username: data.user[1] || '',
-        email: data.user[2] || '',
+        username: data.user.name || '',
+        email: data.user.email || '',
         password: '' // Do not pre-fill password for security reasons
+
       });
 
-      if (data.profile_pic) {
-        setPreviewUrl(`https://journaljot-api.onrender.com/profile_pic/${userEmail}`);
+      // Handle profile_pic as data URL or base64 string
+      if (data.user.profile_pic) {
+          setPreviewUrl(data.user.profile_pic);
+      } else {
+        setPreviewUrl('');
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
-  };
+};
 
     useEffect(() => {
     // Get email from localStorage once on mount
@@ -73,19 +77,33 @@ const Profile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //send to backend here
-        try{
-            const response = await axios.post('https://journaljot-api.onrender.com/api/user', {
-              name: formData.username,
-              email: formData.email,
-              password: formData.password
-            });setMessage(response.data.message);
-        } catch (error) {
-          setMessage(error.response?.data?.message || "Login failed");
+
+        // Create a FormData object for multipart/form-data
+        const multipartForm = new FormData();
+        multipartForm.append('name', formData.username);
+        multipartForm.append('email', formData.email);
+        multipartForm.append('password', formData.password);
+
+        // If a new profile picture is selected, append it
+        if (selectedFile) {
+            multipartForm.append('profile_pic', selectedFile);
         }
-        // Form submission logic here
+
+        try {
+            const response = await axios.post(
+                'https://journaljot-api.onrender.com/api/user',
+                multipartForm,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
+            setMessage(response.data.message);
+        } catch (error) {
+            setMessage(error.response?.data?.message || "Profile update failed");
+        }
         console.log("Form submitted:", formData);
-        
     };
 
     const handleUpload = async () => {
@@ -95,11 +113,12 @@ const Profile = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', selectedFile);
+        formData.append('email', email); // Use the email from state
+        formData.append('profile_pic', selectedFile);
 
         try {
             const response = await axios.post(
-                `https://journaljot-api.onrender.com/upload_profile_pic?email=${email}`,
+                `https://journaljot-api.onrender.com/api/profile_image`,
                 formData,
                 {
                     headers: {
@@ -116,6 +135,13 @@ const Profile = () => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
+        // Only allow JPEG images
+        if (file.type !== "image/jpeg" && file.type !== "image/jpg") {
+            setMessage("Only JPEG images are allowed.");
+            setSelectedFile(null);
+            return;
+        }
 
         setSelectedFile(file);
 
@@ -203,7 +229,7 @@ const Profile = () => {
         >
           {/* Profile Image Section */}
           <Box className="profileuserimage" sx={{ display: 'block', textAlign: 'center', width: '200px', borderRadius: "50px" }}>
-            {previewUrl ? (
+            {previewUrl ? ( 
              <Box sx={{borderRadius: "50%"}}> <img src={previewUrl} alt="acc" style={{width: "100px", height: '100px', objectFit: "cover", borderRadius: "50%"}} />
             </Box> ) : (
               <Box sx={{ color: 'white', fontSize: '14px', marginBottom: '10px' }}>No image selected</Box>
@@ -212,7 +238,7 @@ const Profile = () => {
             <Input
               type="file"
               id="profileUpload"
-              accept="image/*"
+              accept="image/jpeg"
               onChange={handleFileChange}
               sx={{
                 display: 'block',
